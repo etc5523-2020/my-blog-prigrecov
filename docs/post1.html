@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Priscila Grecov" />
+
+
+<title>Blog-post1</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.15/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="site_libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="site_libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="site_libs/selectize-0.12.0/selectize.min.js"></script>
+<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Blog</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="post1.html">Covid-19 DATA - UK</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Blog-post1</h1>
+<h3 class="subtitle">ETC5523: Communicating with Data - Assessement</h3>
+<h4 class="author">Priscila Grecov</h4>
+<h4 class="date">03/Sep/2020</h4>
+
+</div>
+
+
+<div id="section" class="section level2">
+<h2></h2>
+</div>
+<div id="exploring-covid-19-daily-data-for-united-kingdom." class="section level2">
+<h2>Exploring COVID-19 daily data for United Kingdom.</h2>
+<div id="the-data-used-here-was-retrived-from-httpsgithub.comowidcovid-19-datatreemasterpublicdata.-this-data-is-maintained-by-our-world-in-data-and-it-is-updated-daily-including-data-on-confirmed-cases-deaths-and-testing-as-well-as-other-variables-of-potential-interest-from-several-countries.-to-the-purpose-of-this-post-only-the-data-from-united-kingdom-was-filtered." class="section level5">
+<h5>The data used here was retrived from <a href="https://github.com/owid/covid-19-data/tree/master/public/data" class="uri">https://github.com/owid/covid-19-data/tree/master/public/data</a>. This data is maintained by Our World in Data, and it is updated daily including data on confirmed cases, deaths, and testing, as well as other variables of potential interest from several countries. To the purpose of this post, only the data from United Kingdom was filtered.</h5>
+</div>
+<div id="according-to-this-dataset-united-kingdom-started-to-record-the-covid-19-information-from-february-2020.-the-data-selected-to-display-in-the-tables-is-updated-up-to-august-2020." class="section level5">
+<h5>According to this dataset, United Kingdom started to record the COVID-19 information from February, 2020. The data selected to display in the tables is updated up to August, 2020.</h5>
+</div>
+<div id="by-table-1-we-compiled-the-daily-information-of-confirmed-cases-deaths-and-tests-recorded-in-the-daily-bases-and-in-the-acccumulated-basis.-this-interactive-table-is-designed-for-user-data-exploration-being-possible-filtering-searching-and-sorting-the-data." class="section level5">
+<h5>By Table 1, we compiled the daily information of confirmed cases, deaths and tests, recorded in the daily bases and in the acccumulated basis. This interactive table is designed for user data exploration, being possible filtering, searching, and sorting the data.</h5>
+</div>
+<div id="the-data-shows-that-the-total-covid-19-cases-in-uk-are-334467-and-the-total-number-of-deaths-are-41499-up-to-august-31." class="section level5">
+<h5>The data shows that the total Covid-19 cases in UK are 334,467 and the total number of deaths are 41,499 (up to August, 31).</h5>
+<div id="htmlwidget-866a940ca29935e5c638" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-866a940ca29935e5c638">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"date\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1580515200000\" data-max=\"1.598832e+12\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"2\" data-max=\"334467\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"5487\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"41499\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"1224\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"155174\" data-max=\"13447568\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"11896\" data-max=\"180335\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Table 1: Daily COVID-19 data from UK<\/caption>","data":[["2020-02-01","2020-02-02","2020-02-03","2020-02-04","2020-02-05","2020-02-06","2020-02-07","2020-02-08","2020-02-09","2020-02-10","2020-02-11","2020-02-12","2020-02-13","2020-02-14","2020-02-15","2020-02-16","2020-02-17","2020-02-18","2020-02-19","2020-02-20","2020-02-21","2020-02-22","2020-02-23","2020-02-24","2020-02-25","2020-02-26","2020-02-27","2020-02-28","2020-02-29","2020-03-01","2020-03-02","2020-03-03","2020-03-04","2020-03-05","2020-03-06","2020-03-07","2020-03-08","2020-03-09","2020-03-10","2020-03-11","2020-03-12","2020-03-13","2020-03-14","2020-03-15","2020-03-16","2020-03-17","2020-03-18","2020-03-19","2020-03-20","2020-03-21","2020-03-22","2020-03-23","2020-03-24","2020-03-25","2020-03-26","2020-03-27","2020-03-28","2020-03-29","2020-03-30","2020-03-31","2020-04-01","2020-04-02","2020-04-03","2020-04-04","2020-04-05","2020-04-06","2020-04-07","2020-04-08","2020-04-09","2020-04-10","2020-04-11","2020-04-12","2020-04-13","2020-04-14","2020-04-15","2020-04-16","2020-04-17","2020-04-18","2020-04-19","2020-04-20","2020-04-21","2020-04-22","2020-04-23","2020-04-24","2020-04-25","2020-04-26","2020-04-27","2020-04-28","2020-04-29","2020-04-30","2020-05-01","2020-05-02","2020-05-03","2020-05-04","2020-05-05","2020-05-06","2020-05-07","2020-05-08","2020-05-09","2020-05-10","2020-05-11","2020-05-12","2020-05-13","2020-05-14","2020-05-15","2020-05-16","2020-05-17","2020-05-18","2020-05-19","2020-05-20","2020-05-21","2020-05-22","2020-05-23","2020-05-24","2020-05-25","2020-05-26","2020-05-27","2020-05-28","2020-05-29","2020-05-30","2020-05-31","2020-06-01","2020-06-02","2020-06-03","2020-06-04","2020-06-05","2020-06-06","2020-06-07","2020-06-08","2020-06-09","2020-06-10","2020-06-11","2020-06-12","2020-06-13","2020-06-14","2020-06-15","2020-06-16","2020-06-17","2020-06-18","2020-06-19","2020-06-20","2020-06-21","2020-06-22","2020-06-23","2020-06-24","2020-06-25","2020-06-26","2020-06-27","2020-06-28","2020-06-29","2020-06-30","2020-07-01","2020-07-02","2020-07-03","2020-07-04","2020-07-05","2020-07-06","2020-07-07","2020-07-08","2020-07-09","2020-07-10","2020-07-11","2020-07-12","2020-07-13","2020-07-14","2020-07-15","2020-07-16","2020-07-17","2020-07-18","2020-07-19","2020-07-20","2020-07-21","2020-07-22","2020-07-23","2020-07-24","2020-07-25","2020-07-26","2020-07-27","2020-07-28","2020-07-29","2020-07-30","2020-07-31","2020-08-01","2020-08-02","2020-08-03","2020-08-04","2020-08-05","2020-08-06","2020-08-07","2020-08-08","2020-08-09","2020-08-10","2020-08-11","2020-08-12","2020-08-13","2020-08-14","2020-08-15","2020-08-16","2020-08-17","2020-08-18","2020-08-19","2020-08-20","2020-08-21","2020-08-22","2020-08-23","2020-08-24","2020-08-25","2020-08-26","2020-08-27","2020-08-28","2020-08-29","2020-08-30","2020-08-31"],[2,2,2,2,3,3,4,4,4,8,9,9,10,10,10,10,10,10,10,10,10,10,11,11,11,13,18,22,30,42,47,69,109,164,220,271,352,412,469,617,876,1282,1766,2244,2605,3047,3658,4427,5426,6481,7736,8934,10312,12650,15025,17717,20804,24001,26823,29681,33954,38468,43381,48249,53160,57180,60772,66054,71504,76635,81493,85806,89385,92874,97052,101378,106443,111735,116691,121412,125265,130119,134879,140366,145524,150494,154242,157715,162421,167150,172592,177558,182295,185524,188506,191895,195577,199404,203171,206234,208391,210720,214306,217708,221015,223643,226169,228248,230086,232675,235727,238445,241019,243081,244608,245972,247596,249268,251103,252863,254390,255515,256594,258035,259519,260875,262118,263238,264039,264760,265859,267017,268216,269233,270285,271175,271997,273040,274142,275155,276182,277168,277855,278494,279390,280276,281054,281775,282446,283095,283541,284271,284888,285539,286141,286720,287121,287676,288380,288977,289670,290385,290950,291392,291753,292479,293164,293936,294640,295209,295702,296115,296908,297659,298432,299163,299830,300251,300622,300692,301455,302301,303181,303952,304695,305623,306293,307184,308134,309005,309763,310825,311641,312789,313798,314927,316367,317444,318484,319197,320286,321098,322280,323313,324601,325642,326614,327798,328846,330368,331644,332752,334467],[2,0,0,0,1,0,1,0,0,4,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,2,5,4,8,12,5,22,40,55,56,51,81,60,57,148,259,406,484,478,361,442,611,769,999,1055,1255,1198,1378,2338,2375,2692,3087,3197,2822,2858,4273,4514,4913,4868,4911,4020,3592,5282,5450,5131,4858,4313,3579,3489,4178,4326,5065,5292,4956,4721,3853,4854,4760,5487,5158,4970,3748,3473,4706,4729,5442,4966,4737,3229,2982,3389,3682,3827,3767,3063,2157,2329,3586,3402,3307,2628,2526,2079,1838,2589,3052,2718,2574,2062,1527,1364,1624,1672,1835,1760,1527,1125,1079,1441,1484,1356,1243,1120,801,721,1099,1158,1199,1017,1052,890,822,1043,1102,1013,1027,986,687,639,896,886,778,721,671,649,446,730,617,651,602,579,401,555,704,597,693,715,565,442,361,726,685,772,704,569,493,413,793,751,773,731,667,421,371,70,763,846,880,771,743,928,670,891,950,871,758,1062,816,1148,1009,1129,1440,1077,1040,713,1089,812,1182,1033,1288,1041,972,1184,1048,1522,1276,1108,1715],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,3,7,7,9,10,29,43,65,82,116,162,194,252,288,364,512,703,884,1172,1464,1676,2050,2453,3125,3782,4518,5274,5873,6440,7545,8575,9691,10813,11656,12313,13037,14113,14993,16029,16942,18047,18479,19049,20273,21120,21802,22812,23627,23991,24311,25280,26049,26683,27381,27965,28218,28490,29216,29863,30321,30900,31175,31392,31579,32193,32640,32992,33342,33753,33820,33966,34466,34794,35067,35358,35578,35957,36061,36192,36614,36957,37231,37385,37445,37531,37780,38034,38164,38422,38565,38619,38666,38861,39025,39101,39232,39339,39366,39395,39515,39625,39692,39776,39847,39878,39892,39986,40073,40172,40249,40289,40320,40341,40394,40491,40532,40581,40613,40632,40643,40697,40754,40785,40819,40836,40845,40855,40899,40925,40949,40975,40984,40995,41005,41030,41047,41056,41088,41103,41111,41114,41135,41169,41169,41189,41202,41207,41208,41226,41240,41258,41270,41273,41278,41296,41309,41329,41347,41358,41361,41366,41369,41381,41397,41403,41405,41423,41429,41433,41449,41465,41477,41486,41498,41499],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,4,0,2,1,19,14,22,17,34,46,32,58,36,76,148,191,181,288,292,212,374,403,672,657,736,756,599,567,1105,1030,1116,1122,843,657,724,1076,880,1036,913,1105,432,570,1224,847,682,1010,815,364,320,969,769,634,698,584,253,272,726,647,458,579,275,217,187,614,447,352,350,411,67,146,500,328,273,291,220,379,104,131,422,343,274,154,60,86,249,254,130,258,143,54,47,195,164,76,131,107,27,29,120,110,67,84,71,31,14,94,87,99,77,40,31,21,53,97,41,49,32,19,11,54,57,31,34,17,9,10,44,26,24,26,9,11,10,25,17,9,32,15,8,3,21,34,0,20,13,5,1,18,14,18,12,3,5,18,13,20,18,11,3,5,3,12,16,6,2,18,6,4,16,16,12,9,12,1],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,155174,167098,182047,222937,238836,251569,265885,280304,296747,315141,332925,350575,365081,379649,395912,414469,435389,456527,477776,497092,532229,554992,578066,606093,634319,663377,694987,726553,771817,839597,922684,996826,1060387,1128590,1202251,1268054,1343722,1420462,1495302,1569888,1643429,1710628,1782996,1864403,1946011,2034056,2122318,2197608,2260688,2332060,2413462,2506869,2590930,2670829,2722676,2859563,2923504,2993833,3078468,3174018,3263888,3339151,3403873,3490527,3587330,3682775,3782412,3873426,3957326,4059548,4151154,4249081,4349254,4445275,4542174,4609714,4677522,4756484,4840348,4930797,5017988,5098834,5156119,5219161,5285917,5373957,5510701,5604093,5694990,5760203,5825239,5922583,6035588,6147681,6262114,6355415,6433120,6496653,6597342,6717480,6849508,6977736,7101830,7188816,7262633,7375594,7508695,7658207,7815903,7947599,8050171,8135242,8256935,8388397,8522679,8663993,8798036,8904608,8986873,9117483,9260989,9415384,9562383,9693382,9818696,9941987,10083427,10236970,10400408,10556548,10703374,10857124,10993551,11141214,11310805,11471425,11639184,11814098,11978298,12118924,12272157,12446595,12618033,12798368,12969753,13126236,13263262,13447568,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,11896,11924,13457,14293,15899,12733,13684,14419,16443,18843,17737,17650,14506,14567,15991,18489,20906,21081,21249,19316,17365,22763,23073,28024,28225,29058,31610,31453,45263,65643,83143,74142,63559,68203,71764,65803,73277,76741,74836,74586,73541,67116,72368,80713,81595,88046,88262,75290,63028,79653,81403,93398,84060,79902,51844,69381,63765,70329,84634,95550,89867,75263,64763,86267,96674,95445,98667,90562,83790,66769,91606,97852,98913,95216,96044,66688,67808,78962,83864,86579,87191,80564,57102,59942,66756,88040,93173,93392,90897,64453,62572,97367,112636,112130,114178,93173,76984,63533,100689,120318,131848,128125,124094,86609,74760,112495,129616,149215,157256,131697,102572,84093,121694,131462,134293,140779,134045,104549,82265,130611,143319,154034,147002,130999,124088,123291,140745,152551,162713,156140,146826,153214,135827,147534,167983,159433,167759,174914,162256,140608,153225,175916,170627,180335,171385,155871,137013,163158,null,null,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Date<\/th>\n      <th>Total Cases<\/th>\n      <th>New Cases<\/th>\n      <th>Total Deaths<\/th>\n      <th>New Deaths<\/th>\n      <th>Total Tests<\/th>\n      <th>New Tests<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"autoWidth":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]}],"order":[],"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="in-tables-2-and-3-we-have-numerical-summary-statistics-linked-to-uk-covid-19-cases.-table-2-summarizes-the-daily-statistic-for-the-new-confirmed-cases-deaths-and-tests.-by-this-table-we-can-notice-that-the-total-average-of-new-cases-is-up-to-august-1570-cases-per-day-and-the-more-critical-day-presented-5487-new-cases-in-only-one-day.-if-we-search-for-this-value-in-the-table-1-we-will-see-that-this-record-corresponds-to-the-april-24.-the-worst-death-day-was-april-22-with-1224-deaths." class="section level5">
+<h5>In Tables 2 and 3, we have numerical summary statistics linked to UK Covid-19 cases. Table 2 summarizes the daily statistic for the new confirmed cases, deaths and tests. By this table we can notice that the total average of new cases is (up to August) 1,570 cases per day, and the more critical day presented 5,487 new cases in only one day. If we search for this value in the Table 1, we will see that this record corresponds to the April, 24. The worst death day was April, 22 with 1,224 deaths.</h5>
+<table class="table table table-striped table-hover" style="margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<caption>
+Table 2: Summary Daily Statistics
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Statistic
+</th>
+<th style="text-align:right;">
+Days of Measure
+</th>
+<th style="text-align:right;">
+Daily Average
+</th>
+<th style="text-align:right;">
+Daily St. Dev.
+</th>
+<th style="text-align:right;">
+Minimum Daily
+</th>
+<th style="text-align:right;">
+Pctl(25)
+</th>
+<th style="text-align:right;">
+Pctl(75)
+</th>
+<th style="text-align:right;">
+Maximum Daily
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+New Cases
+</td>
+<td style="text-align:right;">
+213
+</td>
+<td style="text-align:right;">
+1,570
+</td>
+<td style="text-align:right;">
+1,588
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+484
+</td>
+<td style="text-align:right;">
+2526
+</td>
+<td style="text-align:right;">
+5,487
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+New Deaths
+</td>
+<td style="text-align:right;">
+213
+</td>
+<td style="text-align:right;">
+195
+</td>
+<td style="text-align:right;">
+299
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+273
+</td>
+<td style="text-align:right;">
+1,224
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+New Tests
+</td>
+<td style="text-align:right;">
+148
+</td>
+<td style="text-align:right;">
+88,210
+</td>
+<td style="text-align:right;">
+45,940
+</td>
+<td style="text-align:right;">
+11,896
+</td>
+<td style="text-align:right;">
+64281
+</td>
+<td style="text-align:right;">
+125102
+</td>
+<td style="text-align:right;">
+180,335
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="by-table-3-we-observe-that-april-was-the-worst-month-in-terms-of-confirmed-cases-and-number-of-deaths.-the-data-shows-that-seems-uk-is-experiencing-a-second-wave-of-covid-19-during-august-since-the-total-and-average-of-new-cases-returned-to-increase.-however-despite-this-apparent-2nd-wave-on-august-the-daily-average-and-peack-of-deaths-remain-decreasing-comparing-with-previous-months-showing-that-the-treatments-against-covid-19-are-more-efficient-now." class="section level5">
+<h5>By Table 3, we observe that April was the worst month in terms of confirmed cases and number of deaths. The data shows that seems UK is experiencing a second wave of Covid-19 during August, since the total and average of new cases returned to increase. However, despite this apparent 2nd wave, on August the daily average and peack of deaths remain decreasing comparing with previous months, showing that the treatments against Covid-19 are more efficient now.</h5>
+<table class="table table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<caption>
+Table 3: Summary Statistics per Month
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Month
+</th>
+<th style="text-align:right;">
+Tot_Cases
+</th>
+<th style="text-align:right;">
+Avg_Cases
+</th>
+<th style="text-align:right;">
+Max_Cases
+</th>
+<th style="text-align:right;">
+Min_Cases
+</th>
+<th style="text-align:right;">
+St.Dev_Cases
+</th>
+<th style="text-align:right;">
+Tot_Deaths
+</th>
+<th style="text-align:right;">
+Avg_Deaths
+</th>
+<th style="text-align:right;">
+Max_Deaths
+</th>
+<th style="text-align:right;">
+Min_Deaths
+</th>
+<th style="text-align:right;">
+St.Dev_Deaths
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+February
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+March
+</td>
+<td style="text-align:right;">
+29,651
+</td>
+<td style="text-align:right;">
+956
+</td>
+<td style="text-align:right;">
+3,197
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1,079
+</td>
+<td style="text-align:right;">
+2,050
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+374
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+104
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+April
+</td>
+<td style="text-align:right;">
+137,469
+</td>
+<td style="text-align:right;">
+4,582
+</td>
+<td style="text-align:right;">
+5,487
+</td>
+<td style="text-align:right;">
+3,473
+</td>
+<td style="text-align:right;">
+605
+</td>
+<td style="text-align:right;">
+23,999
+</td>
+<td style="text-align:right;">
+800
+</td>
+<td style="text-align:right;">
+1,224
+</td>
+<td style="text-align:right;">
+320
+</td>
+<td style="text-align:right;">
+249
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+May
+</td>
+<td style="text-align:right;">
+87,240
+</td>
+<td style="text-align:right;">
+2,814
+</td>
+<td style="text-align:right;">
+5,442
+</td>
+<td style="text-align:right;">
+1,364
+</td>
+<td style="text-align:right;">
+1,048
+</td>
+<td style="text-align:right;">
+11,336
+</td>
+<td style="text-align:right;">
+366
+</td>
+<td style="text-align:right;">
+726
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+184
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+June
+</td>
+<td style="text-align:right;">
+29,151
+</td>
+<td style="text-align:right;">
+972
+</td>
+<td style="text-align:right;">
+1,484
+</td>
+<td style="text-align:right;">
+446
+</td>
+<td style="text-align:right;">
+249
+</td>
+<td style="text-align:right;">
+2,956
+</td>
+<td style="text-align:right;">
+99
+</td>
+<td style="text-align:right;">
+258
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+68
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+July
+</td>
+<td style="text-align:right;">
+18,760
+</td>
+<td style="text-align:right;">
+605
+</td>
+<td style="text-align:right;">
+846
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+169
+</td>
+<td style="text-align:right;">
+828
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+97
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+August
+</td>
+<td style="text-align:right;">
+32,166
+</td>
+<td style="text-align:right;">
+1,038
+</td>
+<td style="text-align:right;">
+1,715
+</td>
+<td style="text-align:right;">
+670
+</td>
+<td style="text-align:right;">
+240
+</td>
+<td style="text-align:right;">
+330
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

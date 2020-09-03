@@ -1,9 +1,10 @@
 ---
-title: "My Website"
+title: "My Blog - Priscila Grecov"
 ---
 
-Hello, Website!
+Hello!
 
-For more information about simple R Markdown websites, please read the documentation at https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html.
+I am a Master of Data Science student at Monash University in my last semester, and I'm passionate about data science and all its potentials. After studying a lot about the data exploration, data modelling and data analytics, during this my last semester I am concetrating in studying data visualisation and how to communicate my analytical results, in a effective way.
 
-Please also note that simple R Markdown sites are _not_ based on **blogdown**. They are probably good for websites with only a few Rmd documents. For larger-scale and more sophisticated websites (such as blogs), you may want to use **blogdown** instead: https://github.com/rstudio/blogdown.
+This blog contains the experiments and products learned through the unit course ETC5523: Communicating with Data. In this course we train the communication skills related to data analysis, learning how to build a website, a web app, reports and presentations as part of a data analysis workflow.
+
