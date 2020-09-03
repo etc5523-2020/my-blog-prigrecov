@@ -28,12 +28,19 @@ select <- dplyr::select
 
 ## Exploring COVID-19 daily data for United Kingdom.  
   
+### 1) Introduction 
+
+##### At the beginning of 2020, COVID-19 was first found and broke out in Wuhan, China. Then, the disease rapidly spread and broke out in more than 188 countries and regions around the world. In this blog, I focus on the spread and control of COVID-19 in United Kingdom. The story of the spread of this disease in UK begins to be told through three tables.
+
+### 2) Data description
   
 ##### The data used here was retrived from https://github.com/owid/covid-19-data/tree/master/public/data. This data is maintained by Our World in Data, and it is updated daily including data on confirmed cases, deaths, and testing, as well as other variables of potential interest from several countries. To the purpose of this post, only the data from United Kingdom was filtered.
 
+### 3) Data Analysis  
+
 ##### According to this dataset, United Kingdom started to record the COVID-19 information from February, 2020. The data selected to display in the tables is updated up to August, 2020.  
   
-##### By Table 1, we compiled the daily information of confirmed cases, deaths and tests, recorded in the daily bases and in the acccumulated basis. This interactive table is designed for user data exploration, being possible filtering, searching, and sorting the data. 
+##### By Table 1, we compiled the daily information of confirmed cases, deaths and tests, recorded in the daily bases and in the acccumulated basis. This interactive table is designed for user data exploration, being possible filtering, searching, and sorting the data. Therefore, the readers can explore the data by themselves.
 
 ##### The data shows that the total Covid-19 cases in UK are 334,467 and the total number of deaths are 41,499 (up to August, 31).
 
@@ -94,7 +101,8 @@ UK_df2BB[,c(3,5,7)] %>%
 ```
   
   
-##### By Table 3, we observe that April was the worst month in terms of confirmed cases and number of deaths. The data shows that seems UK is experiencing a second wave of Covid-19 during August, since the total and average of new cases returned to increase. However, despite this apparent 2nd wave, on August the daily average and peack of deaths remain decreasing comparing with previous months, showing that the treatments against Covid-19 are more efficient now. 
+##### By Table 3, we observe that April was the worst month in terms of confirmed cases and number of deaths. The data shows that seems UK is experiencing a second wave of Covid-19 during August, since the total and average of new cases returned to increase. However, despite this apparent 2nd wave, on August the daily average and peack of deaths remain decreasing comparing with previous months, showing that the treatments against Covid-19 are more efficient now. By these numbers, we could infer that UK has evoluted in treatment the of Covid-19 patients.
+
 
 ```{r staticSummaryTable3-kable}
 cols <- c('Month', 'new_cases', 'new_deaths')
