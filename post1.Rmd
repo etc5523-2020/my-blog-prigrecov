@@ -60,13 +60,22 @@ UK_df2_B$Month = factor(UK_df2_B$Month, levels=c('February','March','April','May
 ```{r DT-interactiveTable1}
 UK_df2BB = UK_df2_B[,c("date2","total_cases", "new_cases", "total_deaths", "new_deaths", "total_tests", "new_tests")]
 
+#UK_df2BB <- UK_df2BB %>% 
+  #mutate(total_cases = comma(total_cases),
+         #new_cases = comma(new_cases),
+         #total_deaths = comma(total_deaths),
+         #new_deaths = comma(new_deaths),
+         #total_tests = comma(total_tests),
+         #new_tests = comma(new_tests))
+
 datatable(UK_df2BB, 
           filter = 'top', 
           options = list(pageLength = 10, autoWidth = TRUE), 
           rownames = FALSE, 
           caption = 'Table 1: Daily COVID-19 data from UK',
           colnames = c('Date', 'Total Cases', 'New Cases', 'Total Deaths', 'New Deaths', 'Total Tests', 'New Tests')
-          )
+          ) #%>%
+  #formatRound(c("total_cases", "new_cases", "total_deaths", "new_deaths", "total_tests", "new_tests"), 0) 
 ```
   
   
