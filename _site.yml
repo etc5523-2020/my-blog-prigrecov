@@ -9,4 +9,4 @@ navbar:
       href: post1.html
 output:
   html_document:
-    theme: cerulean
+    theme: journal
