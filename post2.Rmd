@@ -61,7 +61,7 @@ PORT_df2_B$Month <- months(PORT_df2_B$date2)
 PORT_df2_B$Month = factor(PORT_df2_B$Month, levels=c('February','March','April','May','June','July','August'))
 ```
 
-```{r graph-evolution-newcases, fig.dim = c(30, 10), fig.align='center'}
+```{r set1-graphs-cases&deaths, fig.dim = c(30, 10), fig.align='center'}
 library(patchwork)
 
 bar_cases <- PORT_df2_B %>%
@@ -106,6 +106,40 @@ bar_deaths <- PORT_df2_B %>%
 
 bar_cases + bar_deaths + plot_layout(widths = 50, guides = "collect")
 ```
+```{r set2-graphs-rates}
+library(ggridges)
+library(tidyverse)
+library(hrbrthemes)
+library(viridis)
+
+h1 <- ggplot(PORT_df2_B, aes(x = positive_rate, y = Month, fill = Month)) + 
+  ggridges::geom_density_ridges(scale = 4) +
+  # ggridges::geom_density_ridges(scale = 4, alpha=0.6, stat="binline", bins=30) +
+  theme_ridges() + 
+  labs(title = 'Positive Rate of cases per tests executed (%)') +
+  theme(legend.position = "none")
+
+h2 <- ggplot(PORT_df2_B, aes(x = tests_per_case, y = Month, fill = Month)) + 
+  ggridges::geom_density_ridges(scale = 4) +
+  #ggridges::geom_density_ridges(scale = 4, alpha=0.6, stat="binline", bins=20) +
+  theme_ridges() + 
+  labs(title = 'Tests executed per case detected') +
+  theme(legend.position = "none")
+h1
+h2
+
+PORT_df2_B$mortality_rate <- round((PORT_df2_B$new_deaths_per_million/PORT_df2_B$new_cases_per_million)*100,2)
+
+h3 <- ggplot(PORT_df2_B, aes(x = mortality_rate, y = Month, fill = Month)) + 
+  ggridges::geom_density_ridges(scale = 4) +
+  # ggridges::geom_density_ridges(scale = 4, alpha=0.6, stat="binline", bins=30) +
+  theme_ridges() + 
+  labs(title = 'Mortality rate per million of habitants (%)') +
+  theme(legend.position = "none")
+h3
+
+```
+
 
 
 ```{r portugal-dataset2-subnationl}
@@ -113,8 +147,35 @@ dt_COVID_subnt <- read.csv("jrc-covid-19-regions-hxl.csv")
 dt_COVID_subnt <- dt_COVID_subnt[-1,]
 dt_COVID_subnt_PRT <- dt_COVID_subnt %>%
   filter(CountryName == "Portugal") 
+dt_COVID_subnt_PRT$Date2 <- as.Date(dt_COVID_subnt_PRT$Date)
+dt_COVID_subnt_PRT$CumulativePositive <- as.numeric(dt_COVID_subnt_PRT$CumulativePositive)
+dt_COVID_subnt_PRT$CumulativeDeceased <- as.numeric(dt_COVID_subnt_PRT$CumulativeDeceased)
+dt_COVID_subnt_PRT$CumulativeRecovered <- as.numeric(dt_COVID_subnt_PRT$CumulativeRecovered)
+dt_COVID_subnt_PRT$CurrentlyPositive <- as.numeric(dt_COVID_subnt_PRT$CurrentlyPositive)
+dt_COVID_subnt_PRT$Hospitalized <- as.numeric(dt_COVID_subnt_PRT$Hospitalized)
+dt_COVID_subnt_PRT$IntensiveCare <- as.numeric(dt_COVID_subnt_PRT$IntensiveCare)
 unique(dt_COVID_subnt_PRT$Region)
 unique(dt_COVID_subnt_PRT$NUTS)
+```
+
+```{r adjusting-dataset2}
+dt_COVID_subnt_PRT_ready <- dt_COVID_subnt_PRT %>%
+    group_by(Region, lat, lon, Date2) %>%
+    summarize(Tot_Positive = sum(CumulativePositive),
+              Tot_Deaths = sum(CumulativeDeceased),
+              Tot_Recover = sum(CumulativeRecovered),
+              Curr_Positive = sum(CurrentlyPositive),
+              Hosp = sum(Hospitalized),
+              IntCare = sum(IntensiveCare),
+              .groups = 'drop')
+```
+
+```{r set3-graphs-linesPerRegion}
+# lines for each region (cases&deaths)
+```
+
+```{r bubblemap-Region-totalcases}
+# bubble map with total cases
 ```
 
 ```{r}
