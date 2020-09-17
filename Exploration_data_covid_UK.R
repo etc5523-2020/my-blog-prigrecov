@@ -1,6 +1,6 @@
 #### From this link: https://github.com/RamiKrispin/coronavirus 
 
-#install.packages("coronavirus")
+install.packages("coronavirus")
 
 library(coronavirus)
 update_dataset()
@@ -27,8 +27,17 @@ unique(coronavirus$country)
 coronavirus_UK <- coronavirus %>% 
   filter(country == "United Kingdom") 
 
+coronavirus_PORT <- coronavirus %>% 
+  filter(country == "Portugal") 
+
+unique(covid19_df$location_type)
+
 covid19_df_UK <- covid19_df %>% 
   filter(location == "United Kingdom") 
+
+covid19_df_PORT <- covid19_df %>% 
+  filter(location == "Portugal") 
+unique(covid19_df_PORT$location_type)
 
 dt2_COVID <- read.csv("owid-covid-data.csv")
 UK_df2 <- dt2_COVID %>%

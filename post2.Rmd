@@ -56,10 +56,51 @@ PORT_df2 <- dt2_COVID %>%
   filter(location == "Portugal") 
 PORT_df2_B <- PORT_df2[-(185:186),]
 PORT_df2_B <- PORT_df2_B[-(1:2),]
-#PORT_df2_B$date2 <- as.Date(UK_df2_B$date)
-#PORT_df2_B$Month <- months(UK_df2_B$date2)
-#PORT_df2_B$Month = factor(UK_df2_B$Month, levels=c('February','March','April','May','June','July','August'))
+PORT_df2_B$date2 <- as.Date(PORT_df2_B$date)
+PORT_df2_B$Month <- months(PORT_df2_B$date2)
+PORT_df2_B$Month = factor(PORT_df2_B$Month, levels=c('February','March','April','May','June','July','August'))
 ```
+
+```{r graph-evolution-newcases, fig.width=20, fig.align='center', fig.height=8}
+library(patchwork)
+
+bar_cases <- PORT_df2_B %>%
+  ggplot(aes(x=date2)) +
+  geom_col(aes(y=new_cases), color="darkblue") + 
+  geom_line(aes(y=total_cases*.04), size = 1.2, color="cyan4") +
+  theme(legend.position="none") +
+  scale_y_continuous(sec.axis = sec_axis(~./0.04, labels = scales::label_comma(), breaks=seq(0, 75000, 12500),
+                                         name = "total accumulated cases"), 
+                     labels = scales::label_comma()) +
+  scale_x_date(date_labels = "%d-%m", date_breaks  ="5 days") +
+  theme(axis.text.x=element_text(angle=60, hjust=1, size = 6)) +
+  ylab('daily qty of new cases') +
+  xlab("") +
+  #xlim(c("2020-03-03","2020-08-31")) +
+  labs(title='Evolution of COVID-19 cases')
+
+
+bar_deaths <- PORT_df2_B %>%
+  ggplot(aes(x=date2)) +
+  geom_col(aes(y=new_deaths), color="darkorange") + 
+  geom_line(aes(y=total_deaths*.04), size = 1.2, color="purple") +
+  theme(legend.position="none") +
+  scale_y_continuous(sec.axis = sec_axis(~./0.04, labels = scales::label_comma(),
+                                         name = "total accumulated deaths"), 
+                     labels = scales::label_comma()) +
+  scale_x_date(date_labels = "%d-%m", date_breaks  ="5 days") +
+  theme(axis.text.x=element_text(angle=60, hjust=1, size = 6)) +
+  ylab('daily qty of new deaths') +
+  xlab("") +
+  #xlim(c("2020-03-03","2020-08-31")) +
+  labs(title='Evolution of COVID-19 deaths')
+
+# bar_cases
+# bar_deaths
+
+bar_cases + bar_deaths + plot_layout(guides = "collect")
+```
+
 
 ```{r portugal-dataset2-subnationl}
 dt_COVID_subnt <- read.csv("jrc-covid-19-regions-hxl.csv")
@@ -67,20 +108,23 @@ dt_COVID_subnt <- dt_COVID_subnt[-1,]
 dt_COVID_subnt_PRT <- dt_COVID_subnt %>%
   filter(CountryName == "Portugal") 
 unique(dt_COVID_subnt_PRT$Region)
+unique(dt_COVID_subnt_PRT$NUTS)
 ```
-```{r}
-unique(port_adm$GID_1)
-unique(port_adm$NAME_1)
-unique(port_adm$VARNAME_1)
-unique(port_adm$CC_1) # maybe this is the one equivalent to regions
-unique(port_adm$HASC_1)
-```
-```{r}
-port_map <- fortify(port_adm, region="NAME_1")
 
-port_adm %>%
-  group_by(CC_1, NAME_1) %>%
-  summarise(n(), )
+```{r}
+#unique(port_adm$GID_1)
+#unique(port_adm$NAME_1)
+#unique(port_adm$VARNAME_1)
+#unique(port_adm$CC_1) # maybe this is the one equivalent to regions
+#unique(port_adm$HASC_1)
+```
+
+```{r}
+#port_map <- fortify(port_adm, region="NAME_1")
+
+#port_adm %>%
+#  group_by(CC_1, NAME_1) %>%
+#  summarise(n(), )
 ```
 
 
