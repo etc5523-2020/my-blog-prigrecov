@@ -61,44 +61,50 @@ PORT_df2_B$Month <- months(PORT_df2_B$date2)
 PORT_df2_B$Month = factor(PORT_df2_B$Month, levels=c('February','March','April','May','June','July','August'))
 ```
 
-```{r graph-evolution-newcases, fig.width=20, fig.align='center', fig.height=8}
+```{r graph-evolution-newcases, fig.dim = c(30, 10), fig.align='center'}
 library(patchwork)
 
 bar_cases <- PORT_df2_B %>%
   ggplot(aes(x=date2)) +
   geom_col(aes(y=new_cases), color="darkblue") + 
-  geom_line(aes(y=total_cases*.04), size = 1.2, color="cyan4") +
+  geom_line(aes(y=total_cases*.04), size = 1.5, color="purple") +
   theme(legend.position="none") +
   scale_y_continuous(sec.axis = sec_axis(~./0.04, labels = scales::label_comma(), breaks=seq(0, 75000, 12500),
                                          name = "total accumulated cases"), 
                      labels = scales::label_comma()) +
   scale_x_date(date_labels = "%d-%m", date_breaks  ="5 days") +
-  theme(axis.text.x=element_text(angle=60, hjust=1, size = 6)) +
+  theme(axis.text.x = element_text(angle=60, hjust=1, size = 20, color = 'darkblue'),
+        axis.text.y = element_text(size = 25,  color = 'darkblue'),
+        axis.title.y = element_text(size = 25, color = 'darkblue', face = "bold"),
+        plot.title = element_text(size = 35, face = "bold", color = 'darkblue')) +
   ylab('daily qty of new cases') +
   xlab("") +
   #xlim(c("2020-03-03","2020-08-31")) +
-  labs(title='Evolution of COVID-19 cases')
+  labs(title='Evolution of cases')
 
 
 bar_deaths <- PORT_df2_B %>%
   ggplot(aes(x=date2)) +
-  geom_col(aes(y=new_deaths), color="darkorange") + 
-  geom_line(aes(y=total_deaths*.04), size = 1.2, color="purple") +
+  geom_col(aes(y=new_deaths), color="darkred") + 
+  geom_line(aes(y=total_deaths*.04), size = 1.5, color="darkorange") +
   theme(legend.position="none") +
   scale_y_continuous(sec.axis = sec_axis(~./0.04, labels = scales::label_comma(),
                                          name = "total accumulated deaths"), 
                      labels = scales::label_comma()) +
   scale_x_date(date_labels = "%d-%m", date_breaks  ="5 days") +
-  theme(axis.text.x=element_text(angle=60, hjust=1, size = 6)) +
+  theme(axis.text.x=element_text(angle=60, hjust=1, size = 20, color="darkred"),
+        axis.text.y = element_text(size = 25, color="darkred"),
+        axis.title.y = element_text(size = 25, color = 'darkred', face = "bold"),
+        plot.title = element_text(size = 35, face = "bold", color = 'darkred')) +
   ylab('daily qty of new deaths') +
   xlab("") +
   #xlim(c("2020-03-03","2020-08-31")) +
-  labs(title='Evolution of COVID-19 deaths')
+  labs(title='Evolution of deaths')
 
 # bar_cases
 # bar_deaths
 
-bar_cases + bar_deaths + plot_layout(guides = "collect")
+bar_cases + bar_deaths + plot_layout(widths = 50, guides = "collect")
 ```
 
 
