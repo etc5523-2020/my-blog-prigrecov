@@ -1,0 +1,62 @@
+---
+title: "Blog-post2"
+subtitle: "ETC5523: Communicating with Data - Assessement"
+author: "Priscila Grecov"
+date: "17/09/2020"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(sparkline)
+library(DT)
+library(stargazer)
+library(knitr)
+library(kableExtra)
+library(broom)
+library(tidycat)
+library(scales)
+library(dplyr)
+library(ggplot2)
+library(plotly)
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+select <- dplyr::select
+```
+
+
+## Exploring COVID-19 daily data for Portugal
+
+<br>  
+
+### 1. Introduction 
+
+
+
+<br> 
+
+### 2. Data Description
+  
+
+
+<br> 
+
+### 3. Data Analysis  
+
+
+
+<br> 
+  
+```{r adjusting-original-dataset}
+dt2_COVID <- read.csv("owid-covid-data.csv")
+UK_df2 <- dt2_COVID %>%
+  filter(location == "United Kingdom") 
+UK_df2_B <- UK_df2[-(246:247),]
+UK_df2_B <- UK_df2_B[-(1:32),]
+UK_df2_B$date2 <- as.Date(UK_df2_B$date)
+UK_df2_B$Month <- months(UK_df2_B$date2)
+UK_df2_B$Month = factor(UK_df2_B$Month, levels=c('February','March','April','May','June','July','August'))
+```
