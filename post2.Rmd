@@ -30,6 +30,13 @@ select <- dplyr::select
 
 ## Exploring COVID-19 daily data for Portugal
 
+<br>
+
+```{r external-image, out.width='30%', fig.align='left'}
+# adding the figure 1
+knitr::include_graphics("image_covid_Port.jpg")
+```
+
 <br>  
 
 ### 1. Introduction 
