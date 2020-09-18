@@ -106,43 +106,48 @@ bar_deaths <- PORT_df2_B %>%
 
 bar_cases + bar_deaths + plot_layout(widths = 50, guides = "collect")
 ```
-```{r set2-graphs-rates}
+```{r set2-graphs-rates, fig.align="center", fig.dim = c(20, 7)}
 library(ggridges)
 library(tidyverse)
 library(hrbrthemes)
 library(viridis)
+library(patchwork)
 
 h1 <- ggplot(PORT_df2_B, aes(x = positive_rate, y = Month, fill = Month)) + 
   ggridges::geom_density_ridges(scale = 4) +
   # ggridges::geom_density_ridges(scale = 4, alpha=0.6, stat="binline", bins=30) +
-  theme_ridges() + 
-  labs(title = 'Positive Rate of cases per tests executed (%)') +
+  theme_ridges(font_size = 17) + 
+  labs(tag = "(B)", title = 'Positive Rate of cases per tests executed (%)') +
+  ylab("") +
   theme(legend.position = "none")
 
 h2 <- ggplot(PORT_df2_B, aes(x = tests_per_case, y = Month, fill = Month)) + 
   ggridges::geom_density_ridges(scale = 4) +
   #ggridges::geom_density_ridges(scale = 4, alpha=0.6, stat="binline", bins=20) +
-  theme_ridges() + 
-  labs(title = 'Tests executed per case detected') +
+  theme_ridges(font_size = 17) + 
+  labs(tag = "(A)", title = 'Tests executed per case detected') +
+  ylab("") +
   theme(legend.position = "none")
-h1
-h2
+# h1
+# h2
 
 PORT_df2_B$mortality_rate <- round((PORT_df2_B$new_deaths_per_million/PORT_df2_B$new_cases_per_million)*100,2)
 
 h3 <- ggplot(PORT_df2_B, aes(x = mortality_rate, y = Month, fill = Month)) + 
   ggridges::geom_density_ridges(scale = 4) +
   # ggridges::geom_density_ridges(scale = 4, alpha=0.6, stat="binline", bins=30) +
-  theme_ridges() + 
-  labs(title = 'Mortality rate per million of habitants (%)') +
+  theme_ridges(font_size = 17) + 
+  labs(tag = "(C)", title = 'Mortality rate per million of habitants (%)') +
+  ylab("") +
   theme(legend.position = "none")
-h3
+# h3
 
+h2 + h1 + h3 + plot_layout(widths = 40, guides = "collect")
 ```
 
 
 
-```{r portugal-dataset2-subnationl}
+```{r portugal-dataset2-subnationl, include=FALSE}
 dt_COVID_subnt <- read.csv("jrc-covid-19-regions-hxl.csv")
 dt_COVID_subnt <- dt_COVID_subnt[-1,]
 dt_COVID_subnt_PRT <- dt_COVID_subnt %>%
@@ -158,9 +163,9 @@ unique(dt_COVID_subnt_PRT$Region)
 unique(dt_COVID_subnt_PRT$NUTS)
 ```
 
-```{r adjusting-dataset2}
+```{r adjusting-dataset2, include=FALSE}
 dt_COVID_subnt_PRT_ready <- dt_COVID_subnt_PRT %>%
-    group_by(Region, lat, lon, Date2) %>%
+    group_by(Date2, Region, lat, lon) %>%
     summarize(Tot_Positive = sum(CumulativePositive),
               Tot_Deaths = sum(CumulativeDeceased),
               Tot_Recover = sum(CumulativeRecovered),
@@ -168,10 +173,53 @@ dt_COVID_subnt_PRT_ready <- dt_COVID_subnt_PRT %>%
               Hosp = sum(Hospitalized),
               IntCare = sum(IntensiveCare),
               .groups = 'drop')
+
+dt_COVID_subnt_PRT_ready %>%
+  select(Date2, Region, Tot_Positive) 
 ```
 
-```{r set3-graphs-linesPerRegion}
-# lines for each region (cases&deaths)
+```{r set3-graphs-linesPerRegion, fig.dim = c(10, 4)}
+
+graphLine_Region_cases <- dt_COVID_subnt_PRT_ready %>%
+  select(Date2, Region, Tot_Positive) %>%
+  filter(Region %in% c("Açores", "Alentejo", "Algarve", "Centro", "Lisbon", "Madeira", "Norte")) %>%
+  ggplot(aes(x = Date2, y = Tot_Positive)) +
+  geom_line(aes(color = Region), size=1.4) +
+  scale_color_ipsum() +
+  xlab("") +
+  ylab("total number of cases") +
+  scale_x_date(date_labels = "%d-%m", date_breaks  ="10 days") +
+  scale_y_continuous(labels = scales::label_comma(), breaks = seq(0, 40000, by=5000)) +
+  #theme_ipsum() +
+  theme_bw(base_size = 11) +
+  theme(axis.text.x=element_text(angle=60, hjust=1, size = 10),
+        plot.title = element_text(size = 15, face = "bold", color = 'darkblue')) +
+  labs(title = "Total cases per Region", size = 15) 
+
+ggplotly(graphLine_Region_cases) %>%
+  config(displayModeBar = F)
+
+graphLine_Region_deaths <- dt_COVID_subnt_PRT_ready %>%
+  select(Date2, Region, Tot_Deaths) %>%
+  filter(Region %in% c("Açores", "Alentejo", "Algarve", "Centro", "Lisbon", "Madeira", "Norte")) %>%
+  filter(Date2 > "2020-03-20") %>%
+  ggplot(aes(x = Date2, y = Tot_Deaths)) +
+  geom_line(aes(color = Region), size=1.4) +
+  scale_color_ipsum() +
+  xlab("") +
+  ylab("total number of deaths") +
+  scale_x_date(date_labels = "%d-%m", date_breaks  ="10 days") +
+  scale_y_continuous(labels = scales::label_comma(),  breaks = seq(0, 900, by=150)) +
+  #theme_ipsum() +
+  theme_bw(base_size = 11) +
+  theme(axis.text.x=element_text(angle=60, hjust=1, size = 10),
+        plot.title = element_text(size = 15, face = "bold", color = 'darkblue')) +
+  labs(title = "Total deaths per Region") 
+
+ggplotly(graphLine_Region_deaths) %>%
+  config(displayModeBar = F)
+
+#grid.arrange(graphLine_Region_cases, graphLine_Region_deaths, nrow = 2)
 ```
 
 ```{r bubblemap-Region-totalcases}
@@ -193,14 +241,3 @@ dt_COVID_subnt_PRT_ready <- dt_COVID_subnt_PRT %>%
 #  group_by(CC_1, NAME_1) %>%
 #  summarise(n(), )
 ```
-
-
-
-library(coronavirus)
-update_dataset()
-
-covid19_df <- refresh_coronavirus_jhu()
-head(covid19_df)
-
-data("coronavirus")
-head(coronavirus)
