@@ -50,7 +50,7 @@ select <- dplyr::select
 
 <br> 
   
-```{r portugal-dataset1}
+```{r portugal-dataset1, include=FALSE}
 dt2_COVID <- read.csv("owid-covid-data.csv")
 PORT_df2 <- dt2_COVID %>%
   filter(location == "Portugal") 
@@ -61,7 +61,7 @@ PORT_df2_B$Month <- months(PORT_df2_B$date2)
 PORT_df2_B$Month = factor(PORT_df2_B$Month, levels=c('February','March','April','May','June','July','August'))
 ```
 
-```{r set1-graphs-cases&deaths, fig.dim = c(30, 10), fig.align='center'}
+```{r set1-graphs-cases&deaths, fig.dim = c(40, 12), fig.align='center'}
 library(patchwork)
 
 bar_cases <- PORT_df2_B %>%
@@ -72,14 +72,13 @@ bar_cases <- PORT_df2_B %>%
   scale_y_continuous(sec.axis = sec_axis(~./0.04, labels = scales::label_comma(), breaks=seq(0, 75000, 12500),
                                          name = "total accumulated cases"), 
                      labels = scales::label_comma()) +
-  scale_x_date(date_labels = "%d-%m", date_breaks  ="5 days") +
-  theme(axis.text.x = element_text(angle=60, hjust=1, size = 20, color = 'darkblue'),
-        axis.text.y = element_text(size = 25,  color = 'darkblue'),
-        axis.title.y = element_text(size = 25, color = 'darkblue', face = "bold"),
-        plot.title = element_text(size = 35, face = "bold", color = 'darkblue')) +
+  scale_x_date(date_labels = "%d-%m", date_breaks  ="10 days", limits = as.Date(c('2020-03-03','2020-08-31'))) +
+  theme(axis.text.x = element_text(angle=60, hjust=1, size = 30, color = 'darkblue'),
+        axis.text.y = element_text(size = 35,  color = 'darkblue'),
+        axis.title.y = element_text(size = 35, color = 'darkblue', face = "bold"),
+        plot.title = element_text(size = 50, face = "bold", color = 'darkblue')) +
   ylab('daily qty of new cases') +
   xlab("") +
-  #xlim(c("2020-03-03","2020-08-31")) +
   labs(title='Evolution of cases')
 
 
@@ -91,20 +90,19 @@ bar_deaths <- PORT_df2_B %>%
   scale_y_continuous(sec.axis = sec_axis(~./0.04, labels = scales::label_comma(),
                                          name = "total accumulated deaths"), 
                      labels = scales::label_comma()) +
-  scale_x_date(date_labels = "%d-%m", date_breaks  ="5 days") +
-  theme(axis.text.x=element_text(angle=60, hjust=1, size = 20, color="darkred"),
-        axis.text.y = element_text(size = 25, color="darkred"),
-        axis.title.y = element_text(size = 25, color = 'darkred', face = "bold"),
-        plot.title = element_text(size = 35, face = "bold", color = 'darkred')) +
+  scale_x_date(date_labels = "%d-%m", date_breaks  ="10 days", limits = as.Date(c('2020-03-03','2020-08-31'))) +
+  theme(axis.text.x=element_text(angle=60, hjust=1, size = 30, color="darkred"),
+        axis.text.y = element_text(size = 35, color="darkred"),
+        axis.title.y = element_text(size = 35, color = 'darkred', face = "bold"),
+        plot.title = element_text(size = 50, face = "bold", color = 'darkred')) +
   ylab('daily qty of new deaths') +
   xlab("") +
-  #xlim(c("2020-03-03","2020-08-31")) +
   labs(title='Evolution of deaths')
 
 # bar_cases
 # bar_deaths
 
-bar_cases + bar_deaths + plot_layout(widths = 50, guides = "collect")
+bar_cases + bar_deaths + plot_layout(widths = 60, guides = "collect")
 ```
 ```{r set2-graphs-rates, fig.align="center", fig.dim = c(20, 7)}
 library(ggridges)
@@ -176,6 +174,7 @@ dt_COVID_subnt_PRT_ready <- dt_COVID_subnt_PRT %>%
 
 dt_COVID_subnt_PRT_ready %>%
   select(Date2, Region, Tot_Positive) 
+
 ```
 
 ```{r set3-graphs-linesPerRegion, fig.dim = c(10, 4)}
@@ -188,7 +187,7 @@ graphLine_Region_cases <- dt_COVID_subnt_PRT_ready %>%
   scale_color_ipsum() +
   xlab("") +
   ylab("total number of cases") +
-  scale_x_date(date_labels = "%d-%m", date_breaks  ="10 days") +
+  scale_x_date(date_labels = "%d-%m", date_breaks  ="10 days", limits = as.Date(c('2020-03-03','2020-09-15'))) +
   scale_y_continuous(labels = scales::label_comma(), breaks = seq(0, 40000, by=5000)) +
   #theme_ipsum() +
   theme_bw(base_size = 11) +
@@ -208,7 +207,7 @@ graphLine_Region_deaths <- dt_COVID_subnt_PRT_ready %>%
   scale_color_ipsum() +
   xlab("") +
   ylab("total number of deaths") +
-  scale_x_date(date_labels = "%d-%m", date_breaks  ="10 days") +
+  scale_x_date(date_labels = "%d-%m", date_breaks  ="10 days", limits = as.Date(c('2020-03-21','2020-09-15'))) +
   scale_y_continuous(labels = scales::label_comma(),  breaks = seq(0, 900, by=150)) +
   #theme_ipsum() +
   theme_bw(base_size = 11) +
@@ -219,25 +218,89 @@ graphLine_Region_deaths <- dt_COVID_subnt_PRT_ready %>%
 ggplotly(graphLine_Region_deaths) %>%
   config(displayModeBar = F)
 
-#grid.arrange(graphLine_Region_cases, graphLine_Region_deaths, nrow = 2)
 ```
 
-```{r bubblemap-Region-totalcases}
-# bubble map with total cases
+
+```{r data-for-choropleth, include=FALSE}
+library(maptools)
+library(rgdal)
+library(raster)
+library(rgeos)
+library(ggalt)
+library(ggthemes)
+library(viridis)
+library(magrittr)
+library(gpclib)
+
+# as stated in the other answer, this is the same as your shapefile
+port_adm <- raster::getData('GADM', country='PRT', level=1)
+
+# make the polygons a bit less verbose
+gSimplify(port_adm, 
+          0.01, 
+          topologyPreserve=TRUE) %>%
+  SpatialPolygonsDataFrame(dat=port_adm@data) -> port_adm
+
+if (!require(gpclib)) install.packages("gpclib", type="source")
+gpclibPermit()
+
+# turn them into a data frame
+port_map <- fortify(port_adm, region="NAME_1")
+port_map2 <-port_map %>%
+  filter(id %in% c("Aveiro", "Beja", "Braga", "Bragança", "Castelo Branco", 
+                          "Coimbra", "Évora", "Faro", "Guarda", "Leiria", "Lisboa",
+                          "Portalegre", "Porto", "Santarém", "Setúbal", "Viana do Castelo",
+                          "Vila Real", "Viseu"))
+
+# reproducibly simulate some data
+set.seed(1492)
+
+puntos <- data.frame(id=c("Aveiro", "Azores", "Beja", "Braga", "Bragança", "Castelo Branco", 
+                          "Coimbra", "Évora", "Faro", "Guarda", "Leiria", "Lisboa",
+                          "Madeira", "Portalegre", "Porto", "Santarém", "Setúbal", "Viana do Castelo",
+                          "Vila Real", "Viseu"),
+                     value = sample(100,20))
+
+cases_vector <- c(23984, 1231, 23984, 23984, 5480,
+                  5480, 1231, 1304, 5480, 5480, 33960,
+                  1231, 23984, 5480, 1231, 23984,
+                  23984, 5480)
+
+puntos2 <- data.frame(id=c("Aveiro", "Beja", "Braga", "Bragança", "Castelo Branco", 
+                          "Coimbra", "Évora", "Faro", "Guarda", "Leiria", "Lisboa",
+                          "Portalegre", "Porto", "Santarém", "Setúbal", "Viana do Castelo",
+                          "Vila Real", "Viseu"),
+                     value = cases_vector)
+
 ```
 
-```{r}
-#unique(port_adm$GID_1)
-#unique(port_adm$NAME_1)
-#unique(port_adm$VARNAME_1)
-#unique(port_adm$CC_1) # maybe this is the one equivalent to regions
-#unique(port_adm$HASC_1)
+```{r choropleth-map}
+# plot it
+gg <- ggplot() 
+
+# necessary in the new world of ggplot2 mapping O_o
+gg <- gg + geom_blank(data=port_map2, 
+                      aes(long, lat))
+
+# draw the base polygon layer
+gg <- gg + geom_map(data=port_map2, 
+                    map=port_map2, 
+                    aes(map_id = id),
+                    color="#b2b2b2", 
+                    size=0.15, 
+                    fill=NA)
+
+# fill in the polygons
+gg <- gg + geom_map(data=puntos2, 
+                    map=port_map2,
+                    aes(fill=value, 
+                        map_id=id),
+                    color="#b2b2b2", 
+                    size=0.15)
+
+gg <- gg + scale_fill_viridis(name="Total cases")
+gg <- gg + theme_map()
+gg <- gg + theme(legend.position=c(0.8, 0.1)) + labs(title = "Distribution of total cases by Region") 
+gg
 ```
 
-```{r}
-#port_map <- fortify(port_adm, region="NAME_1")
-
-#port_adm %>%
-#  group_by(CC_1, NAME_1) %>%
-#  summarise(n(), )
-```
