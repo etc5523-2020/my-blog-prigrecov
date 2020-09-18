@@ -43,28 +43,27 @@ knitr::include_graphics("image_covid_Port.jpg")
 
 ### Introduction 
 
-Hi everyone! Let's continue our Covid-19 post's series discussing today about Portugal data, keeping exploring the effects of Covid-19 over the European continent. Portugal is much smaller than UK and have a lower population density, which consequently leads to distinct effects of Covid-19 over the country.
+Hi everyone! Let's continue our Covid-19 post's series discussing today the Portugal Covid-19 data, keeping exploring the effects of this terrible pandemic over the European continent. Portugal is much smaller than the UK and has a lower population density, which consequently leads to the distinct impacts of Covid-19 over this country.
 
-This time, the story of this disease spread in Portugal will be told in a more visual way, navigating through graphs instead through tables. Firstly, we will see the current situation of the overall country data to explore the general pandemic happenings. In sequence, we will zooming by geographical macro regions to explore the different patterns of this disease along with the different country's area. 
+However, this time, the story of this disease spread will be told more visually, navigating through graphs instead through tables. Firstly, we will see the current situation of the overall country data to explore the general pandemic happenings. In sequence, we will be zooming by geographical macro-regions to explore the different patterns of this disease along with the different country's area. 
 
 <br> 
 
 ### The Data
   
-As int the last post, the data was sourced from https://github.com/owid/covid-19-data/tree/master/public/data, which is maintained by the "Our World Data" organization. This daily dataset contains data on confirmed cases, deaths, and testing, and other variables from several countries. However, to explore the data by the macro regions of Portugal, this time we joined an additional dataset sourced from https://data.humdata.org/dataset/europe-covid-19-subnational-cases. This second dataset contains the number of confirmed cases, recoveries and deaths by country and subnational region due to the Coronavirus pandemic in Europe. This data is maintained by "The Humanitarian Data Exchange" organization.
+As int the last post, the data was sourced from https://github.com/owid/covid-19-data/tree/master/public/data, which is maintained by the "Our World Data" organization. This daily dataset contains data on confirmed cases, deaths, and testing, and other variables from several countries. However, to explore the data by the macro-regions of Portugal, at this time we joined an additional dataset sourced from https://data.humdata.org/dataset/europe-covid-19-subnational-cases. This second dataset contains the number of confirmed cases, recoveries and deaths by country and subnational region due to the Coronavirus pandemic in Europe. This data is maintained by "The Humanitarian Data Exchange" organization.
 
 <br> 
 
 ### **a) Data Story 1**: COVID-19 pandemic evolution over the whole country - *the worst is behind!*
 
-Portugal started to record the Covid-19 information from March 2020, and the first cases were registered in 3rd March 2020. The data displayed by the graphs below are updated up to the end of August 2020. We will explore the pandemic numbers through two sets of plottings:  
+Portugal started to record the Covid-19 information from March 2020, and the first cases were registered on 3rd March 2020. The data displayed by the graphs below are updated up to the end of August 2020. We will explore the pandemic numbers through two sets of plottings:   
   
-  1. **Set 1**: a graph displaying the daily evolution of **new and total cases**, and another displaying the daily evolution of **new and total deaths**.
-  2. **Set 2**: some ridge line graphs exploring the rates of transmisson, testings, and deaths.
+  1. **Set 1**: one graph displaying the daily evolution of **new and total cases**, and another showing the daily evolution of **new and total deaths**.
+  2. **Set 2**: some ridgeline graphs exploring the rates of transmission, testings, and fatalities.
   
-The first 2 graphs plot the daily information of confirmed **cases** (at left) and confirmed **deaths** (at right). Both graphs have 2 y-axis: one measuring the daily recordings (shown by bars), and the other y-axis measuring accumulated recording (shown by line). 
-
-The data shows that till the end of August, a total of almost 60,000 Covid-19 cases have been recorded, and the total number of deaths is close to achieve 2,000 deceases. However, the data shows that it looks like the worst is behind us, despite at the end of August is signalizing a second wave of Covid-19. Indeed, the first plot shows an acceleration of the curve of the total cases (purple curve). However, despite this apparent 2nd wave, the daily and total amount of deaths in Graph 2 remains flat, indicating that the treatments against Covid-19 are more efficient now. Similar to observed with the UK, this fact lead us to infer that the treatment of Covid-19 patients has evolved.
+The first two graphs plot the daily information of confirmed **cases** (at left) and confirmed **deaths** (at right). Both charts have two y-axes: one measuring the daily recordings (shown by the bars), and the other y-axis measuring accumulated recording (indicated by the line).  
+The data shows that a total of almost 60,000 Covid-19 cases have been recorded, and the sum of deaths are close to achieving 2,000 deceases. However,  it looks like the worst is behind us, despite a likely second wave of Covid-19 emerging in late August. Indeed, the first plot shows an acceleration of the curve of the total cases (purple curve). However, despite this apparent 2nd wave, the daily and total amount of deaths in Graph 2 remains flat, indicating that the treatments against Covid-19 are more efficient now. Similar to observed with the UK, this fact leads us to infer that the treatment of Covid-19 patients has evolved.
 
 <br> 
   
@@ -129,8 +128,7 @@ bar_cases + bar_deaths + plot_layout(widths = 60, guides = "collect")
 ```
 <br> 
 
-The second set of graphs confirms this point. We can note in plot (A) that the average of the testing's positive rate has been sistematically decreasing, although the mean rate of executed testings (B) has increased (which explains the recent growth trend of absolute new cases). And by (C) we notice that the average mortality rate (around 1%) is the lowest observed since the beginning of the pandemic crises.  
-
+The second set of graphs confirms this point. We can note in the plot (A) that the average of the testing's positive rate has been systematically decreasing, although the mean percentage of executed testings (B) has increased (which explains the recent growth trend of absolute new cases). And by (C) we notice that the average mortality rate (around 1%) is the lowest observed since the beginning of the pandemic crises.  
 <br> 
 
 ```{r set2-graphs-rates, fig.align="center", fig.dim = c(20, 7), fig.cap="Figure 2: Rates of transmisson, testings, and deaths from March to August 2020 due Covid-19"}
@@ -171,12 +169,12 @@ h1 + h2 + h3 + plot_layout(widths = 40, guides = "collect")
 
 <br> 
 
-### **b) Data Story 2**: COVID-19 pandemic evolution over macro regions of Portugal - *attention to Lisbon region!*
+### **b) Data Story 2**: COVID-19 pandemic evolution over macro-regions of Portugal - *attention to Lisbon region!*
 
-Here the 1st graph shows the total Covid-19 cases for each macro region, while the second one displays the total number of deaths. The conclusions are as follows:
+Here the 1st graph shows the total Covid-19 cases for each macro-region, while the second one displays the total number of deaths. The conclusions are as follows:
 
-* The total number of cases among the regions are following similar patterns of accelaration since the end of August, although the Lisbon region shows a bit higher accelaration than the other regions.
-* The of total deaths seems to be flatten (like in the overall country view), but again the Lisbon region calls our attention, displaying a distinct trend of deaths accelaration, that should be investigated with attention.
+* The total number of cases among the regions are following similar patterns of acceleration since the end of August. However, the Lisbon region shows a bit higher acceleration than the other areas.
+* The of total deaths seems to be flattened (like in the overall country view), but again the Lisbon region calls our attention, displaying a distinct trend of deaths acceleration, that should be investigated with attention.
 
 <br> 
 
@@ -228,8 +226,8 @@ graphLine_Region_cases <- dt_COVID_subnt_PRT_ready %>%
   #theme_ipsum() +
   theme_bw(base_size = 11) +
   theme(axis.text.x=element_text(angle=60, hjust=1, size = 10),
-        plot.title = element_text(size = 15, face = "bold", color = 'darkblue')) +
-  labs(title = "Total cases per Region", subtitle = "This is an interactive graph. Click over the lines to see the data details") 
+        plot.title = element_text(size = 13, face = "bold", color = 'darkblue')) +
+  labs(title = "Total cases per Region (click over the lines to see the data details)") 
 
 ggplotly(graphLine_Region_cases) %>%
   config(displayModeBar = F)
@@ -248,8 +246,8 @@ graphLine_Region_deaths <- dt_COVID_subnt_PRT_ready %>%
   #theme_ipsum() +
   theme_bw(base_size = 11) +
   theme(axis.text.x=element_text(angle=60, hjust=1, size = 10),
-        plot.title = element_text(size = 15, face = "bold", color = 'darkblue')) +
-  labs(title = "Total deaths per Region", subtitle = "This is an interactive graph. Click over the lines to see the data details.") 
+        plot.title = element_text(size = 13, face = "bold", color = 'darkblue')) +
+  labs(title = "Total deaths per Region (click over the lines to see the data details)") 
 
 ggplotly(graphLine_Region_deaths) %>%
   config(displayModeBar = F)
@@ -257,7 +255,7 @@ ggplotly(graphLine_Region_deaths) %>%
 ```
 <br> 
 
-The choropleth map below displays the distribution of the total cases over the Portugal macro regions, depicting and highlighting the divergent and more worriest scenario of Lisbon, that is the regio displayed in *yellow*. 
+The choropleth map below displays the distribution of the total cases over the Portugal macro regions, depicting and highlighting the divergent and more worriest scenario of Lisbon, that is the region displayed in *yellow* with the higher scale of total Covid-19 cases.
 
 <br> 
 
@@ -314,7 +312,11 @@ puntos2 <- data.frame(id=c("Aveiro", "Beja", "Braga", "Bragança", "Castelo Bran
 
 ```
 
-```{r choropleth-map, fig.cap="Figure 4: Map of Portugal with the geographical distribution of total Covid-19 cases by macro regions since March 2020"}
+```{r choropleth-map, fig.cap="Figure 4: Map of Portugal with the geographical distribution of total Covid-19 cases by districts since March 2020"}
+
+# create centroids for labels
+cnames <- aggregate(cbind(long, lat) ~ id, data=port_map2, 
+                    FUN=function(x)mean(range(x)))
 
 # plot it
 gg <- ggplot() 
@@ -337,11 +339,11 @@ gg <- gg + geom_map(data=puntos2,
                     aes(fill=value, 
                         map_id=id),
                     color="#b2b2b2", 
-                    size=0.15)
+                    size=0.15) + geom_text(data = cnames, aes(x = long, y = lat, label = id), size = 4, fontface = "bold", color="white")
 
 gg <- gg + scale_fill_viridis(name="Total cases")
 gg <- gg + theme_map()
-gg <- gg + theme(legend.position=c(0.8, 0.1), plot.title = element_text(size = 15, face = "bold", color = 'darkblue')) + labs(title = "Distribution of total cases by Region") 
+gg <- gg + theme(legend.position=c(0.8, 0.1), plot.title = element_text(size = 15, face = "bold", color = 'darkblue')) + labs(title = "Distribution of total cases by Districts") 
 gg
 
 ```

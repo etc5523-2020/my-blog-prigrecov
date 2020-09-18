@@ -12,7 +12,7 @@ knitr::include_graphics("photo.jpeg")
 ```
 
 
-**I am a Master of Data Science student at Monash University in my last semester, and I'm passionate about data science and all its potentials. After studying a lot about the data exploration, data modelling and data analytics, during this my last semester, I am concentrating on learning data visualisation and how to communicate my analytical results, effectively.**
+**I am a postgraduate student of Data Science at Monash University, and I'm passionate about data science and all its potentials. After studying a lot about the data exploration, data modelling and data analytics, during this semester, I am concentrating on learning data visualisation and how to communicate my analytical results, effectively.**
 
 **This blog contains the experiments and products learned through the unit course ETC5523: Communicating with Data. In this course, we train the communication skills related to data analysis, learning how to build a website, a web app, reports and presentations as part of a data analysis workflow.**
 
