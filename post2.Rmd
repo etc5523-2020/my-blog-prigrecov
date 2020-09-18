@@ -59,7 +59,7 @@ However, this time, the story of this disease spread will be told more visually,
 
 ### The Data
   
-As int the last post, the data was sourced from https://github.com/owid/covid-19-data/tree/master/public/data, which is maintained by the "Our World Data" organization. This daily dataset contains data on confirmed cases, deaths, and testing, and other variables from several countries. However, to explore the data by the macro-regions of Portugal, at this time we joined an additional dataset sourced from https://data.humdata.org/dataset/europe-covid-19-subnational-cases. This second dataset contains the number of confirmed cases, recoveries and deaths by country and subnational region due to the Coronavirus pandemic in Europe. This data is maintained by "The Humanitarian Data Exchange" organization.
+As in the last post, the data was sourced from https://github.com/owid/covid-19-data/tree/master/public/data, which is maintained by the "Our World Data" organization. This daily dataset contains data on confirmed cases, deaths, and testing, and other variables from several countries. However, to explore the data by the macro-regions of Portugal, at this time we joined an additional dataset sourced from https://data.humdata.org/dataset/europe-covid-19-subnational-cases. This second dataset contains the number of confirmed cases, recoveries and deaths by country and subnational region due to the Coronavirus pandemic in Europe. This data is maintained by "The Humanitarian Data Exchange" organization.
 
 <br> 
 
