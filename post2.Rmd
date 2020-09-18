@@ -8,17 +8,19 @@ output: html_document
 
 ```{r setup, include = FALSE}
 library(tidyverse)
-library(sparkline)
-library(DT)
-library(stargazer)
 library(knitr)
-library(kableExtra)
 library(broom)
 library(tidycat)
 library(scales)
 library(dplyr)
 library(ggplot2)
 library(plotly)
+library(patchwork)
+library(ggridges)
+library(tidyverse)
+library(hrbrthemes)
+library(viridis)
+
 knitr::opts_chunk$set(
   echo = FALSE,
   message = FALSE,
@@ -39,28 +41,42 @@ knitr::include_graphics("image_covid_Port.jpg")
 
 <br>  
 
-### 1. Introduction 
+### Introduction 
 
+Hi everyone! Let's continue our Covid-19 post's series discussing today about Portugal data, keeping exploring the effects of Covid-19 over the European continent. Portugal is much smaller than UK and have a lower population density, which consequently leads to distinct effects of Covid-19 over the country.
 
+This time, the story of this disease spread in Portugal will be told in a more visual way, navigating through graphs instead through tables. Firstly, we will see the current situation of the overall country data to explore the general pandemic happenings. In sequence, we will zooming by geographical macro regions to explore the different patterns of this disease along with the different country's area. 
 
 <br> 
 
-### 2. Data Description
+### The Data
   
-
+As int the last post, the data was sourced from https://github.com/owid/covid-19-data/tree/master/public/data, which is maintained by the "Our World Data" organization. This daily dataset contains data on confirmed cases, deaths, and testing, and other variables from several countries. However, to explore the data by the macro regions of Portugal, this time we joined an additional dataset sourced from https://data.humdata.org/dataset/europe-covid-19-subnational-cases. This second dataset contains the number of confirmed cases, recoveries and deaths by country and subnational region due to the Coronavirus pandemic in Europe. This data is maintained by "The Humanitarian Data Exchange" organization.
 
 <br> 
 
-### 3. Data Analysis  
+### **a) Data Story 1**: COVID-19 pandemic evolution over the whole country - *the worst is behind!*
 
+Portugal started to record the Covid-19 information from March 2020, and the first cases were registered in 3rd March 2020. The data displayed by the graphs below are updated up to the end of August 2020. We will explore the pandemic numbers through two sets of plottings:  
+  
+  1. **Set 1**: a graph displaying the daily evolution of **new and total cases**, and another displaying the daily evolution of **new and total deaths**.
+  2. **Set 2**: some ridge line graphs exploring the rates of transmisson, testings, and deaths.
+  
+The first 2 graphs plot the daily information of confirmed **cases** (at left) and confirmed **deaths** (at right). Both graphs have 2 y-axis: one measuring the daily recordings (shown by bars), and the other y-axis measuring accumulated recording (shown by line). 
 
+The data shows that till the end of August, a total of almost 60,000 Covid-19 cases have been recorded, and the total number of deaths is close to achieve 2,000 deceases. However, the data shows that it looks like the worst is behind us, despite at the end of August is signalizing a second wave of Covid-19. Indeed, the first plot shows an acceleration of the curve of the total cases (purple curve). However, despite this apparent 2nd wave, the daily and total amount of deaths in Graph 2 remains flat, indicating that the treatments against Covid-19 are more efficient now. Similar to observed with the UK, this fact lead us to infer that the treatment of Covid-19 patients has evolved.
 
 <br> 
   
 ```{r portugal-dataset1, include=FALSE}
+# reading the data
 dt2_COVID <- read.csv("owid-covid-data.csv")
+
+# filtering the data from Portugal only
 PORT_df2 <- dt2_COVID %>%
-  filter(location == "Portugal") 
+  filter(location == "Portugal")
+
+# formatting the data
 PORT_df2_B <- PORT_df2[-(185:186),]
 PORT_df2_B <- PORT_df2_B[-(1:2),]
 PORT_df2_B$date2 <- as.Date(PORT_df2_B$date)
@@ -68,9 +84,9 @@ PORT_df2_B$Month <- months(PORT_df2_B$date2)
 PORT_df2_B$Month = factor(PORT_df2_B$Month, levels=c('February','March','April','May','June','July','August'))
 ```
 
-```{r set1-graphs-cases&deaths, fig.dim = c(40, 12), fig.align='center'}
-library(patchwork)
+```{r set1-graphs-cases&deaths, fig.dim = c(40, 12), fig.align='center', fig.cap="Figure 1: Daily and accumulated Covid-19 cases and deaths from March to August 2020"}
 
+# plotting graph 1 - for cases
 bar_cases <- PORT_df2_B %>%
   ggplot(aes(x=date2)) +
   geom_col(aes(y=new_cases), color="darkblue") + 
@@ -88,7 +104,7 @@ bar_cases <- PORT_df2_B %>%
   xlab("") +
   labs(title='Evolution of cases')
 
-
+# plotting graph 2 - for deaths
 bar_deaths <- PORT_df2_B %>%
   ggplot(aes(x=date2)) +
   geom_col(aes(y=new_deaths), color="darkred") + 
@@ -111,33 +127,36 @@ bar_deaths <- PORT_df2_B %>%
 
 bar_cases + bar_deaths + plot_layout(widths = 60, guides = "collect")
 ```
-```{r set2-graphs-rates, fig.align="center", fig.dim = c(20, 7)}
-library(ggridges)
-library(tidyverse)
-library(hrbrthemes)
-library(viridis)
-library(patchwork)
+<br> 
 
+The second set of graphs confirms this point. We can note in plot (A) that the average of the testing's positive rate has been sistematically decreasing, although the mean rate of executed testings (B) has increased (which explains the recent growth trend of absolute new cases). And by (C) we notice that the average mortality rate (around 1%) is the lowest observed since the beginning of the pandemic crises.  
+
+<br> 
+
+```{r set2-graphs-rates, fig.align="center", fig.dim = c(20, 7), fig.cap="Figure 2: Rates of transmisson, testings, and deaths from March to August 2020 due Covid-19"}
+
+# positive rate plot
 h1 <- ggplot(PORT_df2_B, aes(x = positive_rate, y = Month, fill = Month)) + 
   ggridges::geom_density_ridges(scale = 4) +
   # ggridges::geom_density_ridges(scale = 4, alpha=0.6, stat="binline", bins=30) +
   theme_ridges(font_size = 17) + 
-  labs(tag = "(B)", title = 'Positive Rate of cases per tests executed (%)') +
+  labs(tag = "(A)", title = 'Positive Rate of cases per tests executed (%)') +
   ylab("") +
   theme(legend.position = "none")
 
+# tests per case plot
 h2 <- ggplot(PORT_df2_B, aes(x = tests_per_case, y = Month, fill = Month)) + 
   ggridges::geom_density_ridges(scale = 4) +
   #ggridges::geom_density_ridges(scale = 4, alpha=0.6, stat="binline", bins=20) +
   theme_ridges(font_size = 17) + 
-  labs(tag = "(A)", title = 'Tests executed per case detected') +
+  labs(tag = "(B)", title = 'Tests executed per case detected') +
   ylab("") +
   theme(legend.position = "none")
-# h1
-# h2
 
-PORT_df2_B$mortality_rate <- round((PORT_df2_B$new_deaths_per_million/PORT_df2_B$new_cases_per_million)*100,2)
+# calculating the mortalitiy rate
+PORT_df2_B$mortality_rate <- round((PORT_df2_B$new_deaths_per_million/PORT_df2_B$new_cases_per_million)*100, 2)
 
+# mortalility rate plot
 h3 <- ggplot(PORT_df2_B, aes(x = mortality_rate, y = Month, fill = Month)) + 
   ggridges::geom_density_ridges(scale = 4) +
   # ggridges::geom_density_ridges(scale = 4, alpha=0.6, stat="binline", bins=30) +
@@ -145,12 +164,21 @@ h3 <- ggplot(PORT_df2_B, aes(x = mortality_rate, y = Month, fill = Month)) +
   labs(tag = "(C)", title = 'Mortality rate per million of habitants (%)') +
   ylab("") +
   theme(legend.position = "none")
-# h3
 
-h2 + h1 + h3 + plot_layout(widths = 40, guides = "collect")
+# plotting the grid of graphs
+h1 + h2 + h3 + plot_layout(widths = 40, guides = "collect")
 ```
 
+<br> 
 
+### **b) Data Story 2**: COVID-19 pandemic evolution over macro regions of Portugal - *attention to Lisbon region!*
+
+Here the 1st graph shows the total Covid-19 cases for each macro region, while the second one displays the total number of deaths. The conclusions are as follows:
+
+* The total number of cases among the regions are following similar patterns of accelaration since the end of August, although the Lisbon region shows a bit higher accelaration than the other regions.
+* The of total deaths seems to be flatten (like in the overall country view), but again the Lisbon region calls our attention, displaying a distinct trend of deaths accelaration, that should be investigated with attention.
+
+<br> 
 
 ```{r portugal-dataset2-subnationl, include=FALSE}
 dt_COVID_subnt <- read.csv("jrc-covid-19-regions-hxl.csv")
@@ -184,7 +212,8 @@ dt_COVID_subnt_PRT_ready %>%
 
 ```
 
-```{r set3-graphs-linesPerRegion, fig.dim = c(10, 4)}
+
+```{r set3-graphs-linesPerRegion, fig.dim = c(10, 4), fig.cap="Figure 3: Evolution of total Covid-19 cases and deaths by macro regions of Portugal from March to August 2020"}
 
 graphLine_Region_cases <- dt_COVID_subnt_PRT_ready %>%
   select(Date2, Region, Tot_Positive) %>%
@@ -200,7 +229,7 @@ graphLine_Region_cases <- dt_COVID_subnt_PRT_ready %>%
   theme_bw(base_size = 11) +
   theme(axis.text.x=element_text(angle=60, hjust=1, size = 10),
         plot.title = element_text(size = 15, face = "bold", color = 'darkblue')) +
-  labs(title = "Total cases per Region", size = 15) 
+  labs(title = "Total cases per Region", subtitle = "This is an interactive graph. Click over the lines to see the data details") 
 
 ggplotly(graphLine_Region_cases) %>%
   config(displayModeBar = F)
@@ -220,13 +249,17 @@ graphLine_Region_deaths <- dt_COVID_subnt_PRT_ready %>%
   theme_bw(base_size = 11) +
   theme(axis.text.x=element_text(angle=60, hjust=1, size = 10),
         plot.title = element_text(size = 15, face = "bold", color = 'darkblue')) +
-  labs(title = "Total deaths per Region") 
+  labs(title = "Total deaths per Region", subtitle = "This is an interactive graph. Click over the lines to see the data details.") 
 
 ggplotly(graphLine_Region_deaths) %>%
   config(displayModeBar = F)
 
 ```
+<br> 
 
+The choropleth map below displays the distribution of the total cases over the Portugal macro regions, depicting and highlighting the divergent and more worriest scenario of Lisbon, that is the regio displayed in *yellow*. 
+
+<br> 
 
 ```{r data-for-choropleth, include=FALSE}
 library(maptools)
@@ -281,7 +314,8 @@ puntos2 <- data.frame(id=c("Aveiro", "Beja", "Braga", "Bragança", "Castelo Bran
 
 ```
 
-```{r choropleth-map}
+```{r choropleth-map, fig.cap="Figure 4: Map of Portugal with the geographical distribution of total Covid-19 cases by macro regions since March 2020"}
+
 # plot it
 gg <- ggplot() 
 
@@ -307,7 +341,8 @@ gg <- gg + geom_map(data=puntos2,
 
 gg <- gg + scale_fill_viridis(name="Total cases")
 gg <- gg + theme_map()
-gg <- gg + theme(legend.position=c(0.8, 0.1)) + labs(title = "Distribution of total cases by Region") 
+gg <- gg + theme(legend.position=c(0.8, 0.1), plot.title = element_text(size = 15, face = "bold", color = 'darkblue')) + labs(title = "Distribution of total cases by Region") 
 gg
+
 ```
 
