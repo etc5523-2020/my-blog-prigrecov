@@ -71,6 +71,7 @@ Portugal started to record the Covid-19 information from March 2020, and the fir
   2. **Set 2**: some ridgeline graphs exploring the rates of transmission, testings, and fatalities.
   
 The first two graphs plot the daily information of confirmed **cases** (at left) and confirmed **deaths** (at right). Both charts have two y-axes: one measuring the daily recordings (shown by the bars), and the other y-axis measuring accumulated recording (indicated by the line).  
+
 The data shows that a total of almost 60,000 Covid-19 cases have been recorded, and the sum of deaths are close to achieving 2,000 deceases. However,  it looks like the worst is behind us, despite a likely second wave of Covid-19 emerging in late August. Indeed, the first plot shows an acceleration of the curve of the total cases (purple curve). However, despite this apparent 2nd wave, the daily and total amount of deaths in Graph 2 remains flat, indicating that the treatments against Covid-19 are more efficient now. Similar to observed with the UK, this fact leads us to infer that the treatment of Covid-19 patients has evolved.
 
 <br> 
