@@ -136,7 +136,7 @@ bar_cases + bar_deaths + plot_layout(widths = 60, guides = "collect")
 ```
 <br> 
 
-The second set of graphs confirms this point. We can note in the plot (A) that the average of the testing's positive rate has been systematically decreasing, although the mean percentage of executed testings (B) has increased (which explains the recent growth trend of absolute new cases). And by (C) we notice that the average mortality rate (around 1%) is the lowest observed since the beginning of the pandemic crises.  
+The second set of graphs confirms this point. We can note in the plot (A) that the average of the positive testings rate has been systematically decreasing, even with the mean percentage of performed testings (B) increasing (which either explains the recent growth trend of new cases). And by (C) we notice that the average mortality rate (around 1%) is the lowest observed since the beginning of the pandemic crises. 
 <br> 
 
 ```{r set2-graphs-rates, fig.align="center", fig.dim = c(20, 7), fig.cap="Figure 2: Rates of transmisson, testings, and deaths from March to August 2020 due Covid-19"}
@@ -181,8 +181,8 @@ h1 + h2 + h3 + plot_layout(widths = 40, guides = "collect")
 
 Here the 1st graph shows the total Covid-19 cases for each macro-region, while the second one displays the total number of deaths. The conclusions are as follows:
 
-* The total number of cases among the regions are following similar patterns of acceleration since the end of August. However, the Lisbon region shows a bit higher acceleration than the other areas.
-* The of total deaths seems to be flattened (like in the overall country view), but again the Lisbon region calls our attention, displaying a distinct trend of deaths acceleration, that should be investigated with attention.
+* By the 1st graph, we see that the total number of cases among the regions are following similar patterns of acceleration since the end of August. However, the Lisbon region shows a bit higher acceleration than the other areas.
+* In the 2nd graph we observe that the total of deaths seems to be flattened (like in the overall country view), but again the Lisbon region calls our attention, displaying a distinct trend of deaths' acceleration, that should be investigated with attention.
 
 <br> 
 
@@ -270,7 +270,7 @@ ggplotly(graphLine_Region_deaths) %>%
 ```
 <br> 
 
-The choropleth map below displays the distribution of the total cases over the Portugal macro regions, depicting and highlighting the divergent and more worriest scenario of Lisbon, that is the region displayed in *yellow* with the higher scale of total Covid-19 cases.
+The choropleth map below displays the distribution of the total cases over the Portugal continental districts, depicting and highlighting the divergent and more worriest scenario of Lisbon, that is the region displayed in *yellow* with the higher scale of total Covid-19 cases.
 
 <br> 
 
@@ -318,7 +318,7 @@ puntos2 <- data.frame(id=c("Aveiro", "Beja", "Braga", "Bragança", "Castelo Bran
 
 ```
 
-```{r choropleth-map, fig.cap="Figure 4: Map of Portugal with the geographical distribution of total Covid-19 cases by districts since March 2020"}
+```{r choropleth-map, fig.cap="Figure 4: Map of Portugal with the geographical distribution of total Covid-19 cases by the continental districts since March 2020"}
 
 # create centroids for labels
 cnames <- aggregate(cbind(long, lat) ~ id, data=port_map2, 
