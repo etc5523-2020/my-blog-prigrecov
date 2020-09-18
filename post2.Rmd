@@ -20,6 +20,14 @@ library(ggridges)
 library(tidyverse)
 library(hrbrthemes)
 library(viridis)
+library(maptools)
+library(rgdal)
+library(raster)
+library(rgeos)
+library(ggalt)
+library(ggthemes)
+library(magrittr)
+library(gpclib)
 
 knitr::opts_chunk$set(
   echo = FALSE,
@@ -179,7 +187,10 @@ Here the 1st graph shows the total Covid-19 cases for each macro-region, while t
 <br> 
 
 ```{r portugal-dataset2-subnationl, include=FALSE}
+# reading the 2nd dataset
 dt_COVID_subnt <- read.csv("jrc-covid-19-regions-hxl.csv")
+
+# formatting the 2nd dataset
 dt_COVID_subnt <- dt_COVID_subnt[-1,]
 dt_COVID_subnt_PRT <- dt_COVID_subnt %>%
   filter(CountryName == "Portugal") 
@@ -195,6 +206,7 @@ unique(dt_COVID_subnt_PRT$NUTS)
 ```
 
 ```{r adjusting-dataset2, include=FALSE}
+# additional formatting to prepare the data for plotting
 dt_COVID_subnt_PRT_ready <- dt_COVID_subnt_PRT %>%
     group_by(Date2, Region, lat, lon) %>%
     summarize(Tot_Positive = sum(CumulativePositive),
@@ -213,6 +225,7 @@ dt_COVID_subnt_PRT_ready %>%
 
 ```{r set3-graphs-linesPerRegion, fig.dim = c(10, 4), fig.cap="Figure 3: Evolution of total Covid-19 cases and deaths by macro regions of Portugal from March to August 2020"}
 
+# regional graph of cases
 graphLine_Region_cases <- dt_COVID_subnt_PRT_ready %>%
   select(Date2, Region, Tot_Positive) %>%
   filter(Region %in% c("Açores", "Alentejo", "Algarve", "Centro", "Lisbon", "Madeira", "Norte")) %>%
@@ -232,6 +245,8 @@ graphLine_Region_cases <- dt_COVID_subnt_PRT_ready %>%
 ggplotly(graphLine_Region_cases) %>%
   config(displayModeBar = F)
 
+
+# regional graph of deaths
 graphLine_Region_deaths <- dt_COVID_subnt_PRT_ready %>%
   select(Date2, Region, Tot_Deaths) %>%
   filter(Region %in% c("Açores", "Alentejo", "Algarve", "Centro", "Lisbon", "Madeira", "Norte")) %>%
@@ -260,15 +275,6 @@ The choropleth map below displays the distribution of the total cases over the P
 <br> 
 
 ```{r data-for-choropleth, include=FALSE}
-library(maptools)
-library(rgdal)
-library(raster)
-library(rgeos)
-library(ggalt)
-library(ggthemes)
-library(viridis)
-library(magrittr)
-library(gpclib)
 
 # as stated in the other answer, this is the same as your shapefile
 port_adm <- raster::getData('GADM', country='PRT', level=1)
