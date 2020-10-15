@@ -9,6 +9,9 @@ navbar:
       href: post1.html
     - text: "Covid-19 DATA - Portugal"
       href: post2.html
+    - text: "Covid-19 Shiny App"
+      href: post3.html
+      
 output:
   html_document:
     theme: journal

@@ -1,0 +1,83 @@
+---
+title: "Blog-post3: A Self-reflection from Shiny App"
+subtitle: "ETC5523: Communicating with Data - Assessement"
+author: "Priscila Grecov"
+date: "17/09/2020"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+select <- dplyr::select
+```
+<br>
+
+## COVID-19 Across the World Dashboard - a Shiny APP
+
+<br>
+
+```{r external-image, out.width='30%', fig.align='left', fig.cap="Source: https://images.app.goo.gl/P5XiEFgd5q4qUE2i9"}
+# adding the figure 1
+knitr::include_graphics("Thinking.jpg")
+```
+
+
+*"Ask yourself if what you're doing today is getting you closer to where you want to be tomorrow." (Radma Verix)* 
+
+<br> 
+
+### 1. Introducing the APP
+
+Continuing the analysis discussion and exploration about the Covid-19 data, recently I have developed a Shiny APP dashboard project as an assessment product conducted while coursing the "ETC5523-Communicating with Data" unit at Monash University. It can be assessed by the link below: 
+
+* COVID-19 ACROSS THE WORLD APP: https://priscila-grecov.shinyapps.io/shiny-assessment-prigrecov/
+
+The aims of this 3rd blog-post are:  
+
+  1. to introduce you to this Shiny APP, explaining its features and how it works, and 
+  2. to make a reflection and review about what could be improved.
+
+This Shiny APP intends to provide an overview analysis of the evolution of Novel Coronavirus pandemic across the world using some interactive graphs and tables as visualization tools for this, which were built using the Shiny framework in R.  
+
+The APP has two sessions in its navbar. The 1st Session shows the progress of Covid-19 positive cases and deaths globally, while the 2nd Session progresses detailing the data by continent and by country, comparing the evolution of COVID-19 cases and deaths, in a daily and accumulated basis, through the six continents and 210 countries. The analysis was done using a date range from the commencing of pandemic data recording (end of December of 2019) up to 30 September 2020. The interactive graphs and tables allow updating the data and views according to a change/selection from user input provided by shiny features, permitting a customized data exploration according to the user interest.
+
+
+#### a. The Data
+  
+As in the last two posts, the data continues being the same one sourced from https://github.com/owid/covid-19-data/tree/master/public/data, which is maintained by the "Our World in Data" organization (https://ourworldindata.org), based on Oxford University. As said before, this data is updated daily and includes data on COVID confirmed cases, deaths, and testing, from several countries across the world, as such as other social and economic variables of potential interest. 
+
+
+#### b. First Session - *Overall World Data*
+
+
+
+
+#### c. Second Session - *Data by Continent and Country*
+
+
+
+<br> 
+
+### 2. Self Review
+<br> 
+
+##### *– What did I do well?*
+<br> 
+
+
+##### *– What are the points I can improve on?*
+<br> 
+
+
+##### *– What are some things that I’d like to add that’s plausible?*
+<br> 
+
+
+##### *– What are some things that you’d like to add that cannot be done yet due to limitation in data or technology?*
+
+
+
