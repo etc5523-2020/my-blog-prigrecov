@@ -355,27 +355,30 @@ This session contains two graphs displaying two different data views (“Positiv
 </div>
 <div id="self-review" class="section level3">
 <h3>2. Self Review</h3>
-<div id="what-i-did-well" class="section level5">
-<h5><em>– What I did well:</em></h5>
+<div id="what-i-did-well" class="section level4">
+<h4><em>– What I did well:</em></h4>
 <p>I think the best feature of this app was the capacity to provide several views and combination of views for different statitiscal measures and different information simultaneously. Furthermore, the fact that the views, its combinations and displayed information is selected by the user interest, provided more freedom during the exploration analysis interaction.</p>
 <p>Another highlight it was the idea to present the data starting from a global macro view, and progreeding to more granulated data as continents, and lastly a micro partition view of countries, up to a interactive table displaying all detailed analytical daily data. This interactive table also was designed for user data exploration, being possible filtering, searching, and sorting the full data in many ways. Therefore, users can explore the entire data recordings by themselves, for each one of 210 countries. This gradual data zooming enhanced the building of a data story conveyed through the App.</p>
-<p>Finally, I think the grid density plot in the 1st Tab was an unusual and different way to see the evolution of COVID-19 data that returns a rich information that is not depicted by the conventinal bar and line evolution graphs. By this chart we can observe at once the evolution of the averages, peaks and the evolution of dispersion of the data. For example, for the “Death” view, we notice that average deaths are declining as the dispersion of the distribution of deaths. What is a good news not depicted by the daily and accumulated conventional plottings.</p>
+<p>I think the grid density plot in the 1st Tab was an differential and unsual way to show the evolution of COVID-19 data that returns a rich information that is not depicted by the conventinal bar and line evolution graphs. By this chart we can observe at once the evolution of the averages, peaks and the evolution of dispersion of the data. For example, for the “Death” view, we notice that average deaths are declining as the dispersion of the distribution of deaths. What is a good news not depicted by the daily and accumulated conventional plottings, giving a clearer picture to the reader.</p>
+<p>Finally, there was embedded enough instructions in the App to make clear for the user on how to use it and the informational aiming of each plot.</p>
 </div>
-<div id="points-i-can-improve-on" class="section level5">
-<h5><em>– Points I can improve on:</em></h5>
-<p><br></p>
+<div id="points-i-can-improve-on" class="section level4">
+<h4><em>– Points I can improve on:</em></h4>
+<p>The layout design of the app is the area where I consider there are more opportunities to improve upon this App. For example, the place and format how the instructions were displayed maybe were not the best visual option. Perhaps, the better idea would be displaying the instructions as you hover the cursor over the plot titles or selected input boxes, i.e. making use of more dynamic content features provided by <code>shinydashboard</code> library. Or making possible the instruction boxes collapsible. Definitely, I think that if I had used the <code>shinydashboard</code> package I could delivered a richer layout displaying. But I only discovered the possibilities of this library very close from the due date, and I had enough time to learn about it and converted all my already content to this format. But in the next opportunity certainly I will do more use from this package.</p>
+<p>Another point to be improved is the schema color chosen for the second tab. I made a choice to use cooler colors, but I think the final result was boring. Differently from the 1st tab where the colors are more attractive. This is etiher another point to improve, although the schema of colors is padronized inside each tab/session, it is not pradronized between the two tabs.</p>
+<p>Related to the options for <code>input data</code>, I didn’t used the <code>slide input</code> alternative which likely would be an interesting resource/feature to zooming in and zooming out (or slicing) the period of date interval of the plots. This point had added even more interactivity to the application.</p>
 </div>
-<div id="some-plausible-things-that-id-like-to-add" class="section level5">
-<h5><em>– Some plausible things that I’d like to add:</em></h5>
+<div id="some-plausible-things-that-id-like-to-add" class="section level4">
+<h4><em>– Some plausible things that I’d like to add:</em></h4>
 <p>There are a long list of plausible things that could be added to enhance this exploration analisys, but because of time constraint were not feasible to implement up to due date. Let’s list some of them:</p>
 <ol style="list-style-type: decimal">
 <li><p>A <strong>world choropleth map</strong> displaying the distribution of the total cases and deaths per country. With this kind of chart we could depict a big comparison picture of all countries at the same time, in an unique view.</p></li>
-<li><p>More <strong><code>event_data()</code> implementations</strong> over the graphs allowing to highlighting the points clicked (in the case of bar charts). As we have some graphs with many bars, this resource helps a better visualisation. I have some difficulties to implement more than this kind of effects over my bar graphs, but maybe with more time I think I could find the solution for that.</p></li>
+<li><p>More <strong><code>event_data()</code> implementations</strong> over the <code>plotly</code> graphs allowing to highlighting the points clicked (in the case of bar charts). As we have some graphs with many bars, this resource helps a better visualisation. I have some difficulties to implement more than this kind of effects over my bar graphs, but maybe with more time I think I could find the solution for that.</p></li>
 <li><p>A third tab focused on <strong>forecasting analysis</strong>. As we have the data in time-series format, with more time won’t be difficult to implement some simple forecasting models and display it as projections of the observed curves.</p></li>
 </ol>
 </div>
-<div id="what-couldnt-be-added-due-to-limitation-in-data-or-technology" class="section level5">
-<h5><em>– What couldn’t be added due to limitation in data or technology:</em></h5>
+<div id="what-couldnt-be-added-due-to-limitation-in-data-or-technology" class="section level4">
+<h4><em>– What couldn’t be added due to limitation in data or technology:</em></h4>
 <p>Some things cannot be done yet with the current data/technology and these limitations are as follows:</p>
 <ul>
 <li><p><strong>Data Limitation</strong> - in the 2nd post published about Portugal COVID-19 data, I did an interesting analysis using the data about <em>“Positive Rate of Cases per tests executed (%)”</em>, <em>“Ratio of Tests executed per case detected (%)”</em>, and <em>“Mortality Rate per million of habitants (%)”</em> using a grid of density plots displayed by month. This analysis allow us to know how the rate of transmission, testing and deaths are evoluting and infering if the pandemic spread and treatment are getting better or worse. At this time this analysis couldn’t be done because this information wasn’t avaiable for all countries, just for the main countries.</p></li>
