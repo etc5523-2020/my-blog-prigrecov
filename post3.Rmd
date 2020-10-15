@@ -28,6 +28,11 @@ knitr::include_graphics("Thinking.jpg")
 
 *"Ask yourself if what you're doing today is getting you closer to where you want to be tomorrow." (Radma Verix)* 
 
+The aims of this 3rd blog-post are:  
+
+  1. to introduce you to this Shiny APP, explaining its features and how it works, and 
+  2. to make a reflection and review about what could be improved.
+
 <br> 
 
 ### 1. Introducing the APP
@@ -36,29 +41,33 @@ Continuing the analysis discussion and exploration about the Covid-19 data, rece
 
 * COVID-19 ACROSS THE WORLD APP: https://priscila-grecov.shinyapps.io/shiny-assessment-prigrecov/
 
-The aims of this 3rd blog-post are:  
+This Shiny APP intends to provide an overview analysis of the evolution of Novel Coronavirus pandemic across the world using some interactive graphs and tables as visualization tools for this, which were built using the Shiny framework in R. Using this framework, the purpose was to build an interactive and concise explanation in the Web-App format that can be shared, easily used and intuitive (self-interpreted data).
 
-  1. to introduce you to this Shiny APP, explaining its features and how it works, and 
-  2. to make a reflection and review about what could be improved.
-
-This Shiny APP intends to provide an overview analysis of the evolution of Novel Coronavirus pandemic across the world using some interactive graphs and tables as visualization tools for this, which were built using the Shiny framework in R.  
-
-The APP has two sessions in its navbar. The 1st Session shows the progress of Covid-19 positive cases and deaths globally, while the 2nd Session progresses detailing the data by continent and by country, comparing the evolution of COVID-19 cases and deaths, in a daily and accumulated basis, through the six continents and 210 countries. The analysis was done using a date range from the commencing of pandemic data recording (end of December of 2019) up to 30 September 2020. The interactive graphs and tables allow updating the data and views according to a change/selection from user input provided by shiny features, permitting a customized data exploration according to the user interest.
+The APP has two tabs in its navbar. The 1st Tab shows the evolution of Covid-19 positive cases and deaths globally (a macro view), while the 2nd Tab progresses detailing the data by continent and by country (from medium to micro view), comparing the evolution of COVID-19 cases and deaths, in a daily and accumulated basis, through the six continents and 210 countries. The analysis period starts from the commencing of pandemic data recording (end of December of 2019) up to 30 September 2020. The interactive graphs and tables allow updating the data and views according to a change/selection from user input provided by shiny features, permitting a customized data exploration according to the user interest.
 
 
 #### a. The Data
   
-As in the last two posts, the data continues being the same one sourced from https://github.com/owid/covid-19-data/tree/master/public/data, which is maintained by the "Our World in Data" organization (https://ourworldindata.org), based on Oxford University. As said before, this data is updated daily and includes data on COVID confirmed cases, deaths, and testing, from several countries across the world, as such as other social and economic variables of potential interest. 
+As in the last two posts, the data continues being the same one sourced from this [GitHub repo](https://github.com/owid/covid-19-data/tree/master/public/data), which is maintained by the ["Our World in Data"](https://ourworldindata.org) organization, based on Oxford University. As commented in the last two posts, this data is updated daily and includes data on COVID confirmed cases, deaths, and testing, from several countries across the world, as such as other social and economic variables of potential interest. 
 
 
-#### b. First Session - *Overall World Data*
+#### b. First Tab - *Overall World Data*
+Each tab has a text box with instructions about how to operate the interactions/views and a brief explanation about the contents.  
+This session contains two graphs displaying two different data views ("Positive Cases" or "Deaths") according the selection made by user clicking on the buttons.
+
+* **Evolution of Positive Cases (or Deaths) in the World**: a double-y-axis plot displaying the evolution of daily data series (shown by bars - 1st y-axis) and accumulated data series (indicated by line - 2nd y-axis) for the "Positive Cases" or "Deaths" view. When clicking in any data point, the x and y values are displayed in pop-ups labels and also in the interactive text box below the graph.  
+  
+* **Global New Cases (or New Deaths) Distribution over the months**: a plot with a grid of density curves that summarizes, for the data view selected by buttons ("Positive Cases" or "Deaths"), how the distribution of this selected data series evolutes across the months. The vision permits analyzing the monthly evolution of averages and dispersion/variance of the selected data.
 
 
+#### c. Second Tab - *Data by Continent and Country*
+Here the 1st option of interaction allows the user selecting which statistic measure she wants to examine over 6 options: cases or deaths, daily or accumulated data, raw or smoothed data. Then, this selected statistic is plotted along with two graphs: 
 
+* **a multiple line chart by continent** which permits analyzing the evolution of the chosen statistic data over time and across all continents at the same time.
 
-#### c. Second Session - *Data by Continent and Country*
+* **a bar chart for the country** selected (the 2nd option of interaction) by user. This chart changes according to the user choices for country and statistic measure. The plot allows us to observe the combined evolution of the chosen data/statistic over time for each country selected by the user.
 
-
+Besides that, for the country select by the user, there is **detailed interactive table** compiling the *complete daily time-series information of confirmed cases, deaths and tests, recorded in the daily and accumulated basis*. And a second **summary static table** (for the same selected country) aggregating the information of the monthly average of new positive cases and deaths and the maximum levels achieved on the month — a summary view of average and maximum recordings evolution over the months, for each country.
 
 <br> 
 
