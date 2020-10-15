@@ -1,5 +1,5 @@
 ---
-title: "Blog-post3: A Self-reflection from Shiny App"
+title: "Blog-post3: A Self-reflection from my 1st Shiny App"
 subtitle: "ETC5523: Communicating with Data - Assessement"
 author: "Priscila Grecov"
 date: "17/09/2020"
@@ -41,19 +41,19 @@ Continuing the analysis discussion and exploration about the Covid-19 data, rece
 
 * COVID-19 ACROSS THE WORLD APP: https://priscila-grecov.shinyapps.io/shiny-assessment-prigrecov/
 
-This Shiny APP intends to provide an overview analysis of the evolution of Novel Coronavirus pandemic across the world using some interactive graphs and tables as visualization tools for this, which were built using the Shiny framework in R. Using this framework, the purpose was to build an interactive and concise explanation in the Web-App format that can be shared, easily used and intuitive (self-interpreted data).
+This Shiny APP intends to provide an overview analysis of the evolution of Novel Coronavirus pandemic across the world using some interactive graphs and tables as visualization tools for this, which were built using the Shiny framework in R. Using this framework, the purpose was to build an interactive and concise exploration in the Web-App format that can be shared, easily used and intuitive (self-interpreted data).
 
 The APP has two tabs in its navbar. The 1st Tab shows the evolution of Covid-19 positive cases and deaths globally (a macro view), while the 2nd Tab progresses detailing the data by continent and by country (from medium to micro view), comparing the evolution of COVID-19 cases and deaths, in a daily and accumulated basis, through the six continents and 210 countries. The analysis period starts from the commencing of pandemic data recording (end of December of 2019) up to 30 September 2020. The interactive graphs and tables allow updating the data and views according to a change/selection from user input provided by shiny features, permitting a customized data exploration according to the user interest.
 
 
-#### a. The Data
+#### a. Data Source
   
 As in the last two posts, the data continues being the same one sourced from this [GitHub repo](https://github.com/owid/covid-19-data/tree/master/public/data), which is maintained by the ["Our World in Data"](https://ourworldindata.org) organization, based on Oxford University. As commented in the last two posts, this data is updated daily and includes data on COVID confirmed cases, deaths, and testing, from several countries across the world, as such as other social and economic variables of potential interest. 
 
 
 #### b. First Tab - *Overall World Data*
 Each tab has a text box with instructions about how to operate the interactions/views and a brief explanation about the contents.  
-This session contains two graphs displaying two different data views ("Positive Cases" or "Deaths") according the selection made by user clicking on the buttons.
+This session contains two graphs displaying two different data views ("Positive Cases" or "Deaths") to be chosen by the user.
 
 * **Evolution of Positive Cases (or Deaths) in the World**: a double-y-axis plot displaying the evolution of daily data series (shown by bars - 1st y-axis) and accumulated data series (indicated by line - 2nd y-axis) for the "Positive Cases" or "Deaths" view. When clicking in any data point, the x and y values are displayed in pop-ups labels and also in the interactive text box below the graph.  
   
@@ -67,26 +67,39 @@ Here the 1st option of interaction allows the user selecting which statistic mea
 
 * **a bar chart for the country** selected (the 2nd option of interaction) by user. This chart changes according to the user choices for country and statistic measure. The plot allows us to observe the combined evolution of the chosen data/statistic over time for each country selected by the user.
 
-Besides that, for the country select by the user, there is **detailed interactive table** compiling the *complete daily time-series information of confirmed cases, deaths and tests, recorded in the daily and accumulated basis*. And a second **summary static table** (for the same selected country) aggregating the information of the monthly average of new positive cases and deaths and the maximum levels achieved on the month — a summary view of average and maximum recordings evolution over the months, for each country.
+Besides that, for the country select by the user, there is **detailed interactive table** compiling the *complete daily time-series information of confirmed cases, deaths and tests, recorded in the daily and accumulated basis*. And a second **summary static table** (for the same selected country) *aggregating the information* of the monthly average of new positive cases and deaths and the maximum levels achieved on the month — a summary view of average and maximum recordings evolution over the months, for each country.
 
 <br> 
 
 ### 2. Self Review
+
+##### *– What I did well:*
+I think the best feature of this app was the capacity to provide several views and combination of views for different statitiscal measures and different information simultaneously. Furthermore, the fact that the views, its combinations and displayed information is selected by the user interest, provided more freedom during the exploration analysis interaction.
+
+Another highlight it was the idea to present the data starting from a global macro view, and progreeding to more granulated data as continents, and lastly a micro partition view of countries, up to a interactive table displaying all detailed analytical daily data. This interactive table also was designed for user data exploration, being possible filtering, searching, and sorting the full data in many ways. Therefore, users can explore the entire data recordings by themselves, for each one of 210 countries. This gradual data zooming enhanced the building of a data story conveyed through the App.
+
+Finally, I think the grid density plot in the 1st Tab was an unusual and different way to see the evolution of COVID-19 data that returns a rich information that is not depicted by the conventinal bar and line evolution graphs. By this chart we can observe at once the evolution of the averages, peaks and the evolution of dispersion of the data. For example, for the "Death" view, we notice that average deaths are declining as the dispersion of the distribution of deaths. What is a good news not depicted by the daily and accumulated conventional plottings.
+
+
+##### *– Points I can improve on:*
 <br> 
 
-##### *– What did I do well?*
-<br> 
 
+##### *– Some plausible things that I’d like to add:*
+There are a long list of plausible things that could be added to enhance this exploration analisys, but because of time constraint were not feasible to implement up to due date. Let's list some of them:
 
-##### *– What are the points I can improve on?*
-<br> 
+1. A **world choropleth map** displaying the distribution of the total cases and deaths per country. With this kind of chart we could depict a big comparison picture of all countries at the same time, in an unique view.
 
+2. More **`event_data()` implementations** over the graphs allowing to highlighting the points clicked (in the case of bar charts). As we have some graphs with many bars, this resource helps a better visualisation. I have some difficulties to implement more than this kind of effects over my bar graphs, but maybe with more time I think I could find the solution for that.
 
-##### *– What are some things that I’d like to add that’s plausible?*
-<br> 
+3. A third tab focused on **forecasting analysis**. As we have the data in time-series format, with more time won't be difficult to implement some simple forecasting models and display it as projections of the observed curves.
 
+##### *– What couldn't be added due to limitation in data or technology:*
+Some things cannot be done yet with the current data/technology and these limitations are as follows:
 
-##### *– What are some things that you’d like to add that cannot be done yet due to limitation in data or technology?*
+* **Data Limitation** - in the 2nd post published about Portugal COVID-19 data, I did an interesting analysis using the data about *"Positive Rate of Cases per tests executed (%)"*, *"Ratio of Tests executed per case detected (%)"*, and *"Mortality Rate per million of habitants (%)"* using a grid of density plots displayed by month. This analysis allow us to know how the rate of transmission, testing and deaths are evoluting and infering if the pandemic spread and treatment are getting better or worse. At this time this analysis couldn't be done because this information wasn't avaiable for all countries, just for the main countries. 
+
+* **Technology Limitation** - as the APP and the data are not dynamic, this Shiny APP doesn't reflect the real-time data, which makes the application loosing its relevance as the time progreeds once the published information becomes outdated. To update the application I need to manually upload a more recent dataset and knit the application at each time of dataset renewal. 
 
 
 
