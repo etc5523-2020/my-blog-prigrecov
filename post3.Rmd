@@ -110,5 +110,11 @@ Some things cannot be done yet with the current data/technology, and these limit
 
 * **Technology Limitation** - since the APP and the data are not dynamic, this Shiny APP doesn't reflect the real-time data, which makes the application losing its relevance as the time progress once the published information becomes outdated. To update the application, I need to manually upload a more recent dataset and knit the application at each time of dataset renewal. 
 
+<br> 
+
+### CONCLUSION
+As the first experience building a Shiny App and given the time constraints, I believe the App has successfully achieved its primary objective in showing relevant information in an amazing and dynamic interactive flow. It was a valuable experience and training to start. I consider it was a creative construction, and I'm happy with the fact that I have made a dashboard that is visually appealing and useful. Even though many improvements could enhance this project, I think I have done a reasonably decent job in conveying the stats clearly to the reader, immersing the users along with navigation in a way that likely captures their complete attention.
+
+
 
 
