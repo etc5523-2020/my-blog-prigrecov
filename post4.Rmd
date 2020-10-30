@@ -46,8 +46,24 @@ About the package code part, besides the initial `launch_app()` external functio
 
 ### - Suggestions for improvement
 
+Despite the beatiful work executed by Ms. Priya, as imperfect humans we have always something to improve. So, I've listed some suggestions that in my persoonal view could become her work still better:
+
+**a) related to the code**
+
+* **inclusion of examples for the external functions built for the package** --> we cannot notice the examples for the external functions built in the package. The examples are very useful for the user fully understanding how the functions work.
+
+* **declaration of global functions inside the `date_slider_input()` and `select_input_world_countries()`** --> adjusting this point the R CMD check results ran locally should pass without any note, what is important to our package get the credential to be distributed by R.
+
+* **inclusion of at least one test for each external function from package** --> Ms. Priya built tests just for 2 functions from the 6 external functions of the package. With at least one test by each external function, we can offer more tranquility of well working and integrity for the users. Adding more inputs in the test also colaborate in this direction.
 
 
+**b) related to the shiny app**
+
+* **interactive table in the "WorlWide Statistics" tab** --> here there is an small working issue to be fixed: in the selection of "Show xx entries", despite the options 10, 25, 50 and 100, just the option 10 entries is being displaying even when we choose to display another quantity different from 10. This interaction is not working properly.
+
+* **map in the first tab** --> if the size of the circles were differentiated by the proportion of cases maybe would add more information becoming this map still more useful.
+
+* **adjustments in the pictures size** --> the pictures inserted at the beginning of each navegation tab was a very cool idea to become the navigation not boring. However, the quality of images are not very good, reducing the impact of this good idea. Maybe some adjustments in the size of images could fix this issue.
 
 <br> 
 
