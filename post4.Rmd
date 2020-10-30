@@ -31,16 +31,22 @@ The aim of this 4th blog-post is to make a peer review of an R-package developed
 <br> 
 
 ### - Package Overview
-
+The goal of `prikage` R-package is embedding a Shiny application built by Ms. Priya, allowing external users launching the App through an external function called `launch_app()`. It was the first experience for Ms. Priya building an R-package and a Shiny application, so given this, the results are amazing. When the user download the package and launchs the Shiny application, she starts to navigate through an overview data exploration about the COVID-19 pandemic information displayed into interactive graphs and tables. The application starts with a globally vision of the data, progressing to detail the data in Australia by its states, and at the end giving some statistical knowledge for each country selected by the user.
 
 <br> 
 
 ### - Working Review
-  
+The package by itself has all the minimal and necessary components that a R-package asks for and worked very well without any bug, successfully attending the purpose task for what it was built as well as offering to user a good exploratory analysis and visualization about this world current pandemic. So, I can easily declare that this package did what I was expecting: a good and informative navegation through an Shiny app without errors stopping my exploration experience.
+
+Progressing for the package documentation, we find a good README with the enough information about the package aims, installlation procedures, examples of usage and output, and a link for more details in the `pkgdown` page. In the `pkgdown` page all the detailed information and guidelines about the package and Shiny application are given in a objective and well written text. As differential of this package we can cite the amazing and creative logo created for the package. Thus, overall, we can consider that the documentation is more than sufficient to get started and that package is extremely well documented.
+
+About the package code part, besides the initial `launch_app()` external function, Ms. Priya has also created more 5 external functions in order to simplify the structure of Shiny app. This functions are called inside the ui and server files, making the running of the application code much more agile. Tests were done and the package also presented a "passing" status thorough the R-CMD-check giving more security for the user in the package usage.
 
 <br> 
 
 ### - Suggestions for improvement
+
+
 
 
 <br> 
