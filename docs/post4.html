@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Priscila Grecov" />
 
 
-<title>About This Blog</title>
+<title>Blog-post4: A Peer Review of an R-package</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -309,12 +310,70 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">About This Blog</h1>
+<h1 class="title toc-ignore">Blog-post4: A Peer Review of an R-package</h1>
+<h3 class="subtitle">ETC5523: Communicating with Data - Assessement</h3>
+<h4 class="author">Priscila Grecov</h4>
+<h4 class="date">31/10/2020</h4>
 
 </div>
 
 
-<p>More about this blog.</p>
+<p><br></p>
+<div id="covidshiny-r-package---a-peer-review" class="section level2">
+<h2>CovidShiny R-package - a peer review</h2>
+<p><br></p>
+<div class="figure" style="text-align: left">
+<img src="land_page_peerReview.PNG" alt="Source: https://github.com/etc5523-2020/r-package-assessment-priya51096" width="50%" />
+<p class="caption">
+Source: <a href="https://github.com/etc5523-2020/r-package-assessment-priya51096" class="uri">https://github.com/etc5523-2020/r-package-assessment-priya51096</a>
+</p>
+</div>
+<div id="post-aim" class="section level3">
+<h3>- Post Aim</h3>
+<p>The aim of this 4th blog-post is to make a peer review of an R-package developed by one of my classmates while cursing the “ETC5523-Communicating with Data” unit at Monash University. The package that I will review is called <code>prikage</code> and it was developed by <strong>Ms. Priya Ravindra Dingorkar.</strong></p>
+<p><br></p>
+</div>
+<div id="package-overview" class="section level3">
+<h3>- Package Overview</h3>
+<p><br></p>
+</div>
+<div id="working-review" class="section level3">
+<h3>- Working Review</h3>
+<p><br></p>
+</div>
+<div id="suggestions-for-improvement" class="section level3">
+<h3>- Suggestions for improvement</h3>
+<p><br></p>
+</div>
+<div id="what-i-have-learned" class="section level3">
+<h3>- What I have learned</h3>
+<p><br></p>
+</div>
+<div id="appendix" class="section level3">
+<h3>- Appendix</h3>
+<div id="package-review-checklist" class="section level4">
+<h4>Package Review Checklist</h4>
+</div>
+<div id="a.-documentation" class="section level4">
+<h4>a. Documentation:</h4>
+<p>The package includes all the following forms of documentation:</p>
+<ul>
+<li>[ YES ] <strong>Installation instructions:</strong> for the package is found in README</li>
+<li>[ YES ] <strong>Vignette(s)</strong> demonstrating major functionality that runs successfully locally</li>
+<li>[ YES ] <strong>Function Documentation:</strong> for all exported functions in R help</li>
+<li>[ NO ] <strong>Examples</strong> for all exported functions in R Help that run successfully locally –&gt; <em>ANSWER: For all 6 exported functions built for the package were not provided any example.</em></li>
+</ul>
+</div>
+<div id="b.-functionality" class="section level4">
+<h4>b. Functionality:</h4>
+<ul>
+<li><p>[ YES ] <strong>Installation:</strong> Installation succeeds as documented.</p></li>
+<li><p>[ YES ] <strong>Functionality:</strong> Any functional claims of the software been confirmed. –&gt; <em>ANSWER: Concerning to the overall test <code>devtools::check()</code>, running it locally in my machine, returned 0 errors, 0 warnings, but 2 notes about the absense of usage of some global functions. The check result recommended the definition of some global functions inside two external functions built for this package: <code>date_slider_input()</code>, <code>select_input_world_countries()</code>.</em></p></li>
+<li><p>[ More or Less ] <strong>Automated tests:</strong> Unit tests cover essential functions of the package and a reasonable range of inputs and conditions. All tests pass on the local machine. –&gt; <em>ANSWER: The units tests covered only two of the six functions of the package. Just one input was tested for each test created. Using the <code>devtools::test()</code>, all tests passed locally in my machine without errors but with 32 warnings.</em></p></li>
+</ul>
+</div>
+</div>
+</div>
 
 
 

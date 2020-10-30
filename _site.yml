@@ -11,6 +11,9 @@ navbar:
       href: post2.html
     - text: "Covid-19 Shiny App"
       href: post3.html
+    - text: "CovidShiny R-package"
+      href: post4.html
+      
       
 output:
   html_document:
