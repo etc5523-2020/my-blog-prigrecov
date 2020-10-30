@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Priscila Grecov" />
+
+
+<title>Blog-post3: A Self-reflection from my 1st Shiny App</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 61px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h2 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h3 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h4 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h5 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h6 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Blog</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="post1.html">Covid-19 DATA - UK</a>
+</li>
+<li>
+  <a href="post2.html">Covid-19 DATA - Portugal</a>
+</li>
+<li>
+  <a href="post3.html">Covid-19 Shiny App</a>
+</li>
+<li>
+  <a href="post4.html">CovidShiny R-package</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Blog-post3: A Self-reflection from my 1st Shiny App</h1>
+<h3 class="subtitle">ETC5523: Communicating with Data - Assessement</h3>
+<h4 class="author">Priscila Grecov</h4>
+<h4 class="date">17/09/2020</h4>
+
+</div>
+
+
+<p><br></p>
+<div id="covid-19-across-the-world-dashboard---a-shiny-app" class="section level2">
+<h2>COVID-19 Across the World Dashboard - a Shiny APP</h2>
+<p><br></p>
+<div class="figure" style="text-align: left">
+<img src="Thinking.jpg" alt="Source: https://images.app.goo.gl/P5XiEFgd5q4qUE2i9" width="30%" />
+<p class="caption">
+Source: <a href="https://images.app.goo.gl/P5XiEFgd5q4qUE2i9" class="uri">https://images.app.goo.gl/P5XiEFgd5q4qUE2i9</a>
+</p>
+</div>
+<p><em>“Ask yourself if what you’re doing today is getting you closer to where you want to be tomorrow.” (Radma Verix)</em></p>
+<p>The aims of this 3rd blog-post are:</p>
+<ol style="list-style-type: decimal">
+<li>to introduce you to this Shiny APP, explaining its features and how it works, and</li>
+<li>to make a reflection and review about what could be improved.</li>
+</ol>
+<p><br></p>
+<div id="introducing-the-app" class="section level3">
+<h3>1. Introducing the APP</h3>
+<p>Continuing the analysis discussion and exploration about the Covid-19 data, recently, I have developed a Shiny APP dashboard project as an assessment product conducted while coursing the “ETC5523-Communicating with Data” unit at Monash University. It can be assessed by the link below:</p>
+<ul>
+<li>COVID-19 ACROSS THE WORLD APP: <a href="https://priscila-grecov.shinyapps.io/shiny-assessment-prigrecov/" class="uri">https://priscila-grecov.shinyapps.io/shiny-assessment-prigrecov/</a></li>
+</ul>
+<p>This Shiny APP intends to provide an overview analysis of the evolution of Coronavirus pandemic across the world using some interactive graphs and tables as visualisation tools for this, which were built using the Shiny framework in R.</p>
+<p>The purpose of using this Shiny framework was to create an interactive and concise exploration in the Web-App format that can be shared, easily manipulated and intuitive, where the data should be self-interpreted by the reader.</p>
+<p>The APP has two tabs in its navbar. The 1st Tab shows the evolution of Covid-19 positive cases and deaths globally (a macro view). In contrast, the 2nd Tab progresses detailing the data by continent and by country (from medium to micro view), comparing the evolution of COVID-19 cases and deaths, in a daily and accumulated basis, through the six continents and 210 countries. The analysis period starts from the commencing of pandemic data recording (end of December of 2019) up to 30 September 2020. The interactive graphs and tables allow updating the data and views according to a change/selection from user input provided by shiny features, permitting a customised data exploration according to the user interest.</p>
+<div id="a.-data-source" class="section level4">
+<h4>a. Data Source</h4>
+<p>Like in the last two posts, the data continues being the same one sourced from this <a href="https://github.com/owid/covid-19-data/tree/master/public/data">GitHub repo</a>, which is maintained by the <a href="https://ourworldindata.org">“Our World in Data”</a> organisation, based on Oxford University. As commented in the last two posts, this data is updated daily and includes information on COVID confirmed cases, deaths, and testing, from several countries across the world, as such as other social and economic variables of potential interest.</p>
+</div>
+<div id="b.-first-tab---overall-world-data" class="section level4">
+<h4>b. First Tab - <em>Overall World Data</em></h4>
+<p>Each Tab has a text box with instructions about how to operate the interactions/views and a brief explanation about the contents.<br />
+This first Tab contains the two following graphs displaying different data views (“Positive Cases” or “Deaths”) to be chosen interactively by the user:</p>
+<ul>
+<li><p><strong>Evolution of Positive Cases (or Deaths) in the World</strong>: this double-y-axis plot displays the evolution of daily data series (shown by bars - 1st y-axis) and accumulated data series (indicated by line - 2nd y-axis) for the “Positive Cases” or “Deaths” view. When clicking in any data point, the x and y values are displayed in pop-ups labels and also in the interactive text box below the graph.</p></li>
+<li><p><strong>Global New Cases (or New Deaths) Distribution over the months</strong>: a plot with a grid of density curves that summarises, for the data view selected by buttons (“Positive Cases” or “Deaths”), how the distribution of this data chosen series evolutes across the months. The vision permits analysing the monthly evolution of averages and dispersion/variance of the selected data.</p></li>
+</ul>
+</div>
+<div id="c.-second-tab---data-by-continent-and-country" class="section level4">
+<h4>c. Second Tab - <em>Data by Continent and Country</em></h4>
+<p>Here the 1st option of interaction allows the user selecting which statistic measure she wants to examine over 6 options: cases or deaths, daily or accumulated data, raw or smoothed data. Then, this selected statistic is plotted along with two graphs:</p>
+<ul>
+<li><p><strong>a multiple line chart by continent</strong> which permits analysing the evolution of the chosen statistic data over time and across all continents at the same time.</p></li>
+<li><p><strong>a bar chart for the country</strong> selected by the user (the 2nd option of interaction in this panel). Hence, this chart changes according to the user choices for country and statistic measure. The plot allows us to observe the combined evolution of the chosen data/statistic over time for each country selected by the user.</p></li>
+</ul>
+<p>Additionally, for the country selected by the user, there is a <strong>detailed interactive table</strong> compiling the <em>complete daily time-series information of confirmed cases, deaths and tests, recorded in the daily and accumulated basis</em>. And a second <strong>summary static table</strong> (for the same selected country) <em>aggregating the information</em> of the monthly average of new positive cases and deaths and the maximum levels achieved on the month — a summary view of average and maximum recordings evolution over the months, for each country.</p>
+<p><br></p>
+</div>
+</div>
+<div id="self-review" class="section level3">
+<h3>2. Self Review</h3>
+<div id="what-i-did-well" class="section level4">
+<h4><em>– What I did well:</em></h4>
+<p>I think the best feature of this App was the capacity to provide several views and a combination of views for different statistical measures and other information simultaneously. Furthermore, the fact that the user interest selects the views, its combinations and displayed information, provided more freedom during the exploration analysis interaction.</p>
+<p>Another highlight was the idea to present the data starting from a global macro view, progressing to more granulated data as continents, and lastly a micro partition view of countries. And finally, in the end, an interactive table displaying all detailed analytical daily data. This interactive table also was designed for user data exploration, being possible filtering, searching, and sorting the full data in many ways. Therefore, users can explore the entire data recordings by themselves, for each one of 210 countries. This gradual data zooming enhanced the building of a data story conveyed through the App.</p>
+<p>I think the grid density plot in the 1st Tab was a differential and unusual way to show the evolution of COVID-19 data that returns rich information that is not depicted by the conventional bar and line evolution graphs. By this chart, we can observe at once the evolution of the averages, peaks and the data dispersion development. For example, for the “Death” view, we notice that average deaths are declining as well as the dispersion of deaths distribution. It is a piece of good news not depicted by the daily and accumulated conventional plottings, giving a clearer picture to the reader.</p>
+<p>Finally, there was embedded enough instructions in the App, making clear for the reader on how to use it and the informational aiming of each plot.</p>
+</div>
+<div id="points-i-can-improve-on" class="section level4">
+<h4><em>– Points I can improve on:</em></h4>
+<p>The layout design of the App is the area where I consider there are more opportunities to improve upon this App. For example, the place and format how the instructions were displayed maybe were not the best visual option. Perhaps, the better idea would be stating the instructions as you hover the cursor over the plot titles or selected input boxes, i.e. making use of more dynamic content features provided by <code>shinydashboard</code> library. Or making possible the instruction boxes collapsible. Definitely, I think that if I had used the <code>shinydashboard</code> package, I could deliver a more superior layout displaying. But I only discovered the possibilities of this library very close from the due date, and I had not enough time to learn about it and converted all my already content to this format. But in the next opportunity, I certainly will do more use from this package.</p>
+<p>Another point to be improved is the schema colour chosen for the second Tab. I decided to use cooler colours, but I think the final result, despite being classical, it was not so exciting, differently from the 1st Tab where the colours are more attractive. It is either another point to improve, although the schema of colours is patterned inside each tab/session, it is not so patterned between the two tabs.</p>
+<p>Related to the options for <code>input data</code>, I didn’t use the <code>slide input</code> alternative which likely would be an exciting resource/feature to zooming in and zooming out (or slicing) the period of date interval of the plots. This point would have added even more interactivity to the application.</p>
+</div>
+<div id="some-plausible-things-that-id-like-to-add" class="section level4">
+<h4><em>– Some plausible things that I’d like to add:</em></h4>
+<p>There is a long list of plausible things that could be added to enhance this exploration analysis, but because of time constraint, it was not feasible to implement up to due date. Let’s list some of them:</p>
+<ol style="list-style-type: decimal">
+<li><p>A <strong>world choropleth map</strong> displaying the distribution of the total cases and deaths per country. With this kind of chart, we could depict a big comparison picture of all countries at the same time, in a unique view. It could have come opening or closing the panel of the 1st Tab.</p></li>
+<li><p>More <strong><code>event_data()</code> implementations</strong> over the <code>plotly</code> graphs which allow to highlighting the points clicked (in the case of bar charts). As we have some graphs with many bars, this resource helps a better visualisation. I have some difficulties in implementing more than this kind of effects over my bar graphs, but maybe with more time, I think I could find the solution for that.</p></li>
+<li><p>A third tab focused on <strong>forecasting analysis</strong>. Once we have the data in a time-series format, with more time won’t be challenging to implement some simple forecasting models and display it as projections of the observed curves.</p></li>
+</ol>
+</div>
+<div id="what-couldnt-be-added-due-to-limitation-in-data-or-technology" class="section level4">
+<h4><em>– What couldn’t be added due to limitation in data or technology:</em></h4>
+<p>Some things cannot be done yet with the current data/technology, and these limitations are as follows:</p>
+<ul>
+<li><p><strong>Data Limitation</strong> - in the 2nd post published about Portugal COVID-19 data, I did an interesting analysis using the data about <em>“Positive Rate of Cases per tests executed (%)”</em>, <em>“Ratio of Tests executed per case detected (%)”</em>, and <em>“Mortality Rate per million of habitants (%)”</em> using a grid of density plots displayed by month. This analysis allows us to know how the rate of transmission, testing and deaths are evolving and inferring if the pandemic spread and treatment are getting better or worse. At this time this analysis couldn’t be done because this information wasn’t available for all countries, just for the leading countries.</p></li>
+<li><p><strong>Technology Limitation</strong> - since the APP and the data are not dynamic, this Shiny APP doesn’t reflect the real-time data, which makes the application losing its relevance as the time progress once the published information becomes outdated. To update the application, I need to manually upload a more recent dataset and knit the application at each time of dataset renewal.</p></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="conclusion" class="section level3">
+<h3>CONCLUSION</h3>
+<p>As the first experience building a Shiny App and given the time constraints, I believe the App has successfully achieved its primary objective in showing relevant information in an amazing and dynamic interactive flow. It was a valuable experience and training to start. I consider it was a creative construction, and I’m happy with the fact that I have made a dashboard that is visually appealing and useful. Even though many improvements could enhance this project, I think I have done a reasonably decent job in conveying the stats clearly to the reader, immersing the users along with navigation in a way that likely captures their complete attention.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

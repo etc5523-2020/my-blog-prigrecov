@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Priscila Grecov" />
+
+
+<title>Blog-post4: A Peer Review of an R-package</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 61px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h2 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h3 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h4 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h5 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h6 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Blog</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="post1.html">Covid-19 DATA - UK</a>
+</li>
+<li>
+  <a href="post2.html">Covid-19 DATA - Portugal</a>
+</li>
+<li>
+  <a href="post3.html">Covid-19 Shiny App</a>
+</li>
+<li>
+  <a href="post4.html">CovidShiny R-package</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Blog-post4: A Peer Review of an R-package</h1>
+<h3 class="subtitle">ETC5523: Communicating with Data - Assessement</h3>
+<h4 class="author">Priscila Grecov</h4>
+<h4 class="date">31/10/2020</h4>
+
+</div>
+
+
+<p><br></p>
+<div id="covidshiny-r-package---a-peer-review" class="section level2">
+<h2>CovidShiny R-package - a peer review</h2>
+<p><br></p>
+<div class="figure" style="text-align: left">
+<img src="land_page_peerReview.PNG" alt="Source: https://github.com/etc5523-2020/r-package-assessment-priya51096" width="50%" />
+<p class="caption">
+Source: <a href="https://github.com/etc5523-2020/r-package-assessment-priya51096" class="uri">https://github.com/etc5523-2020/r-package-assessment-priya51096</a>
+</p>
+</div>
+<div id="post-aim" class="section level3">
+<h3>- Post Aim</h3>
+<p>The aim of this 4th blog-post is to make a peer review of an R-package developed by one of my classmates while cursing the “ETC5523-Communicating with Data” unit at Monash University. The package that I will review is called <code>prikage</code> and it was developed by <strong>Ms. Priya Ravindra Dingorkar.</strong></p>
+<p><br></p>
+</div>
+<div id="package-overview" class="section level3">
+<h3>- Package Overview</h3>
+<p>The goal of <code>prikage</code> R-package is embedding a Shiny application built by Ms. Priya, allowing external users launching the App through an external function called <code>launch_app()</code>. It was the first experience for Ms. Priya building an R-package and a Shiny application, so given this, the results are amazing. When the user download the package and launchs the Shiny application, she starts to navigate through an overview data exploration about the COVID-19 pandemic information displayed into interactive graphs and tables. The application starts with a globally vision of the data, progressing to detail the data in Australia by its states, and at the end giving some statistical knowledge for each country selected by the user.</p>
+<p><br></p>
+</div>
+<div id="working-review" class="section level3">
+<h3>- Working Review</h3>
+<p>The package by itself has all the minimal and necessary components that a R-package asks for and worked very well without any bug, successfully attending the purpose task for what it was built as well as offering to user a good exploratory analysis and visualization about this world current pandemic. So, I can easily declare that this package did what I was expecting: a good and informative navegation through an Shiny app without errors stopping my exploration experience.</p>
+<p>Progressing for the package documentation, we find a good README with the enough information about the package aims, installlation procedures, examples of usage and output, and a link for more details in the <code>pkgdown</code> page. In the <code>pkgdown</code> page all the detailed information and guidelines about the package and Shiny application are given in a objective and well written text. As differential of this package we can cite the amazing and creative logo created for the package. Thus, overall, we can consider that the documentation is more than sufficient to get started and that package is extremely well documented.</p>
+<p>About the package code part, besides the initial <code>launch_app()</code> external function, Ms. Priya has also created more 5 external functions in order to simplify the structure of Shiny app. This functions are called inside the ui and server files, making the running of the application code much more agile. Tests were done and the package also presented a “passing” status thorough the R-CMD-check giving more security for the user in the package usage.</p>
+<p><br></p>
+</div>
+<div id="suggestions-for-improvement" class="section level3">
+<h3>- Suggestions for improvement</h3>
+<p>Despite the beatiful work executed by Ms. Priya, as imperfect humans we have always something to improve. So, I’ve listed some suggestions that in my persoonal view could become her work still better:</p>
+<p><strong>a) related to the code</strong></p>
+<ul>
+<li><p><strong>inclusion of examples for the external functions built for the package</strong> –&gt; we cannot notice the examples for the external functions built in the package. The examples are very useful for the user fully understanding how the functions work.</p></li>
+<li><p><strong>declaration of global functions inside the <code>date_slider_input()</code> and <code>select_input_world_countries()</code></strong> –&gt; adjusting this point the R CMD check results ran locally should pass without any “note” warning, what is important to our package get the credentials to be distributed by R.</p></li>
+<li><p><strong>inclusion of at least one test for each external function from package</strong> –&gt; Ms. Priya built tests just for 2 functions from the 6 external functions of the package. With at least one test by each external function, we can offer more tranquility of well working and integrity for the users. Adding more inputs in the test also colaborate in this direction.</p></li>
+</ul>
+<p><strong>b) related to the shiny app</strong></p>
+<ul>
+<li><p><strong>interactive table in the “WorlWide Statistics” tab</strong> –&gt; here there is an small working issue to be fixed: in the selection box of “Show xx entries”, despite the options 10, 25, 50 and 100, just the option 10 entries is being displaying even when we choose to display another quantity different from 10. This interaction is not working properly.</p></li>
+<li><p><strong>map in the first tab</strong> –&gt; if the size of the circles were differentiated by the proportion of cases maybe would add more information becoming this map still more useful.</p></li>
+<li><p><strong>adjustments in the pictures size</strong> –&gt; the pictures inserted at the beginning of each navegation tab was a very cool idea to become the navigation not boring. However, the quality of images are not very good, reducing the impact of this good idea. Maybe some adjustments in the size of images could fix this issue.</p></li>
+</ul>
+<p><br></p>
+</div>
+<div id="what-i-have-learned" class="section level3">
+<h3>- What I have learned</h3>
+<p>First, how difficult is to review the peer’s works but at same time how rich is the experience since we learn a lot about different ways to solve problems and find solutions. With Ms.Priya’s work I realized how important is to invest, for instance, in the “About” page. I think in my work I didn’t put much effort in this part, and seeing Ms.Priya outcome for this sessioon make reflected better to pay more attention in this part. Another thing that I’ve learned with Ms.Priya’s woork is the importance to build a data history texts together with the data displaying. Ms.Priya did this very well, adding a lighter and more friendly navigation through the data, besides helping the reader to understand better the analysis context and purposes.</p>
+<p><br></p>
+</div>
+<div id="appendix" class="section level3">
+<h3>- Appendix</h3>
+<div id="package-review-checklist" class="section level4">
+<h4>Package Review Checklist</h4>
+</div>
+<div id="a.-documentation" class="section level4">
+<h4>a. Documentation:</h4>
+<p>The package includes all the following forms of documentation:</p>
+<ul>
+<li>[ YES ] <strong>Installation instructions:</strong> for the package is found in README</li>
+<li>[ YES ] <strong>Vignette(s)</strong> demonstrating major functionality that runs successfully locally</li>
+<li>[ YES ] <strong>Function Documentation:</strong> for all exported functions in R help</li>
+<li>[ NO ] <strong>Examples</strong> for all exported functions in R Help that run successfully locally –&gt; <em>ANSWER: For all 6 exported functions built for the package were not provided any example.</em></li>
+</ul>
+</div>
+<div id="b.-functionality" class="section level4">
+<h4>b. Functionality:</h4>
+<ul>
+<li><p>[ YES ] <strong>Installation:</strong> Installation succeeds as documented.</p></li>
+<li><p>[ YES ] <strong>Functionality:</strong> Any functional claims of the software been confirmed. –&gt; <em>ANSWER: Concerning to the overall test <code>devtools::check()</code>, running it locally in my machine, returned 0 errors, 0 warnings, but 2 notes about the absense of usage of some global functions. The check result recommended the definition of some global functions inside two external functions built for this package: <code>date_slider_input()</code>, <code>select_input_world_countries()</code>.</em></p></li>
+<li><p>[ More or Less ] <strong>Automated tests:</strong> Unit tests cover essential functions of the package and a reasonable range of inputs and conditions. All tests pass on the local machine. –&gt; <em>ANSWER: The units tests covered only two of the six functions of the package. Just one input was tested for each test created. Using the <code>devtools::test()</code>, all tests passed locally in my machine without errors but with 32 warnings.</em></p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
